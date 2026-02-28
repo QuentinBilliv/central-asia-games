@@ -1,0 +1,93 @@
+{
+  "common": {
+    "appName": "Central Asia Games",
+    "loading": "Loading...",
+    "error": "Error",
+    "close": "Close",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "back": "Back",
+    "start": "Start",
+    "restart": "Play again",
+    "players": "Players",
+    "you": "You",
+    "waiting": "Waiting...",
+    "ready": "Ready",
+    "leave": "Leave"
+  },
+  "home": {
+    "title": "Central Asia Games",
+    "subtitle": "Play with your friends, no sign-up needed",
+    "createGame": "Create a game",
+    "azul": {
+      "title": "Azul",
+      "description": "Decorate palace walls with tiles inspired by the mosaics of Samarkand",
+      "players": "2-4 players"
+    },
+    "petitsChevaux": {
+      "title": "Horse Race",
+      "description": "A horse race across the Central Asian steppes",
+      "players": "2-4 players"
+    }
+  },
+  "lobby": {
+    "title": "Game Lobby",
+    "nickname": "Your nickname",
+    "nicknamePlaceholder": "Enter your nickname...",
+    "join": "Join",
+    "inviteLink": "Invite link",
+    "copyLink": "Copy link",
+    "waitingForPlayers": "Waiting for players...",
+    "startGame": "Start game",
+    "minPlayers": "Need at least {min} players",
+    "host": "Host",
+    "playerJoined": "{name} joined the game",
+    "playerLeft": "{name} left the game",
+    "roomExpired": "This room has expired",
+    "roomFull": "This room is full",
+    "gameInProgress": "Game is in progress",
+    "reconnecting": "{name} is reconnecting..."
+  },
+  "azul": {
+    "title": "Azul",
+    "yourTurn": "Your turn",
+    "opponentTurn": "{name}'s turn",
+    "selectFactory": "Select a factory",
+    "selectRow": "Select a row",
+    "round": "Round {n}",
+    "score": "Score",
+    "finalScore": "Final score",
+    "winner": "{name} wins!",
+    "tie": "It's a tie!",
+    "wall": "Wall",
+    "patternLines": "Pattern lines",
+    "floorLine": "Floor line",
+    "center": "Center",
+    "firstPlayer": "First player",
+    "tiles": {
+      "lapis": "Lapis",
+      "gold": "Gold",
+      "terracotta": "Terracotta",
+      "obsidian": "Obsidian",
+      "turquoise": "Turquoise"
+    }
+  },
+  "petitsChevaux": {
+    "title": "Horse Race",
+    "yourTurn": "Your turn",
+    "opponentTurn": "{name}'s turn",
+    "rollDice": "Roll dice",
+    "selectHorse": "Select a horse",
+    "noMoves": "No available moves",
+    "extraTurn": "You rolled a 6! Roll again",
+    "winner": "{name} wins!",
+    "stable": "Stable",
+    "finish": "Finish",
+    "horsesHome": "{count} horses home"
+  },
+  "language": {
+    "fr": "Français",
+    "ru": "Русский",
+    "en": "English"
+  }
+}

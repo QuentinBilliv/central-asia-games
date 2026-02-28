@@ -1,0 +1,93 @@
+{
+  "common": {
+    "appName": "Игры Центральной Азии",
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "close": "Закрыть",
+    "copy": "Копировать",
+    "copied": "Скопировано!",
+    "back": "Назад",
+    "start": "Начать",
+    "restart": "Играть снова",
+    "players": "Игроки",
+    "you": "Вы",
+    "waiting": "Ожидание...",
+    "ready": "Готов",
+    "leave": "Выйти"
+  },
+  "home": {
+    "title": "Игры Центральной Азии",
+    "subtitle": "Играйте с друзьями без регистрации",
+    "createGame": "Создать игру",
+    "azul": {
+      "title": "Азул",
+      "description": "Украсьте стены дворца плиткой, вдохновлённой мозаиками Самарканда",
+      "players": "2-4 игрока"
+    },
+    "petitsChevaux": {
+      "title": "Лошадки",
+      "description": "Скачки по степям Центральной Азии",
+      "players": "2-4 игрока"
+    }
+  },
+  "lobby": {
+    "title": "Комната ожидания",
+    "nickname": "Ваш никнейм",
+    "nicknamePlaceholder": "Введите никнейм...",
+    "join": "Присоединиться",
+    "inviteLink": "Ссылка для приглашения",
+    "copyLink": "Копировать ссылку",
+    "waitingForPlayers": "Ожидание игроков...",
+    "startGame": "Начать игру",
+    "minPlayers": "Нужно минимум {min} игрока",
+    "host": "Хост",
+    "playerJoined": "{name} присоединился",
+    "playerLeft": "{name} вышел",
+    "roomExpired": "Эта комната истекла",
+    "roomFull": "Комната заполнена",
+    "gameInProgress": "Игра уже идёт",
+    "reconnecting": "{name} переподключается..."
+  },
+  "azul": {
+    "title": "Азул",
+    "yourTurn": "Ваш ход",
+    "opponentTurn": "Ход {name}",
+    "selectFactory": "Выберите фабрику",
+    "selectRow": "Выберите ряд",
+    "round": "Раунд {n}",
+    "score": "Счёт",
+    "finalScore": "Итоговый счёт",
+    "winner": "{name} победил!",
+    "tie": "Ничья!",
+    "wall": "Стена",
+    "patternLines": "Линии узора",
+    "floorLine": "Линия штрафа",
+    "center": "Центр",
+    "firstPlayer": "Первый игрок",
+    "tiles": {
+      "lapis": "Лазурит",
+      "gold": "Золото",
+      "terracotta": "Терракота",
+      "obsidian": "Обсидиан",
+      "turquoise": "Бирюза"
+    }
+  },
+  "petitsChevaux": {
+    "title": "Лошадки",
+    "yourTurn": "Ваш ход",
+    "opponentTurn": "Ход {name}",
+    "rollDice": "Бросить кубик",
+    "selectHorse": "Выберите лошадь",
+    "noMoves": "Нет возможных ходов",
+    "extraTurn": "Вы выбросили 6! Бросайте ещё",
+    "winner": "{name} победил!",
+    "stable": "Конюшня",
+    "finish": "Финиш",
+    "horsesHome": "{count} лошадей на финише"
+  },
+  "language": {
+    "fr": "Français",
+    "ru": "Русский",
+    "en": "English"
+  }
+}

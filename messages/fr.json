@@ -1,0 +1,93 @@
+{
+  "common": {
+    "appName": "Jeux d'Asie Centrale",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "close": "Fermer",
+    "copy": "Copier",
+    "copied": "Copié !",
+    "back": "Retour",
+    "start": "Commencer",
+    "restart": "Rejouer",
+    "players": "Joueurs",
+    "you": "Vous",
+    "waiting": "En attente...",
+    "ready": "Prêt",
+    "leave": "Quitter"
+  },
+  "home": {
+    "title": "Jeux d'Asie Centrale",
+    "subtitle": "Jouez avec vos amis, sans inscription",
+    "createGame": "Créer une partie",
+    "azul": {
+      "title": "Azul",
+      "description": "Décorez les murs du palais avec des carreaux inspirés des mosaïques de Samarcande",
+      "players": "2-4 joueurs"
+    },
+    "petitsChevaux": {
+      "title": "Petits Chevaux",
+      "description": "Course de chevaux à travers les steppes d'Asie centrale",
+      "players": "2-4 joueurs"
+    }
+  },
+  "lobby": {
+    "title": "Salon de jeu",
+    "nickname": "Votre pseudo",
+    "nicknamePlaceholder": "Entrez votre pseudo...",
+    "join": "Rejoindre",
+    "inviteLink": "Lien d'invitation",
+    "copyLink": "Copier le lien",
+    "waitingForPlayers": "En attente de joueurs...",
+    "startGame": "Lancer la partie",
+    "minPlayers": "Il faut au moins {min} joueurs",
+    "host": "Hôte",
+    "playerJoined": "{name} a rejoint la partie",
+    "playerLeft": "{name} a quitté la partie",
+    "roomExpired": "Cette partie a expiré",
+    "roomFull": "Cette partie est pleine",
+    "gameInProgress": "La partie est en cours",
+    "reconnecting": "{name} se reconnecte..."
+  },
+  "azul": {
+    "title": "Azul",
+    "yourTurn": "C'est votre tour",
+    "opponentTurn": "Tour de {name}",
+    "selectFactory": "Choisissez une fabrique",
+    "selectRow": "Choisissez une ligne",
+    "round": "Manche {n}",
+    "score": "Score",
+    "finalScore": "Score final",
+    "winner": "{name} a gagné !",
+    "tie": "Égalité !",
+    "wall": "Mur",
+    "patternLines": "Lignes de motif",
+    "floorLine": "Ligne de pénalité",
+    "center": "Centre",
+    "firstPlayer": "Premier joueur",
+    "tiles": {
+      "lapis": "Lapis",
+      "gold": "Or",
+      "terracotta": "Terre cuite",
+      "obsidian": "Obsidienne",
+      "turquoise": "Turquoise"
+    }
+  },
+  "petitsChevaux": {
+    "title": "Petits Chevaux",
+    "yourTurn": "C'est votre tour",
+    "opponentTurn": "Tour de {name}",
+    "rollDice": "Lancer le dé",
+    "selectHorse": "Choisissez un cheval",
+    "noMoves": "Aucun mouvement possible",
+    "extraTurn": "Vous avez fait un 6 ! Rejouez",
+    "winner": "{name} a gagné !",
+    "stable": "Écurie",
+    "finish": "Arrivée",
+    "horsesHome": "{count} chevaux à l'arrivée"
+  },
+  "language": {
+    "fr": "Français",
+    "ru": "Русский",
+    "en": "English"
+  }
+}

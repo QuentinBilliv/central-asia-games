@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" opacity="0.05">
+  <g fill="none" stroke="#d4a017" stroke-width="0.8">
+    <!-- 8-pointed star -->
+    <polygon points="40,8 46,28 66,20 52,34 72,40 52,46 66,60 46,52 40,72 34,52 14,60 28,46 8,40 28,34 14,20 34,28"/>
+    <circle cx="40" cy="40" r="8"/>
+    <circle cx="40" cy="40" r="3" fill="#d4a017" opacity="0.3"/>
+  </g>
+</svg>
