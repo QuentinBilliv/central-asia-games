@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Locale } from '@/i18n/routing';
 
 const languages: { code: Locale; flag: string; name: string }[] = [
@@ -93,7 +94,7 @@ export default function Header() {
     <header className="relative z-20 border-b border-gold-200/50 bg-white/80 backdrop-blur-sm">
       <div className="max-w-6xl mx-auto px-3 sm:px-4 py-2.5 sm:py-3 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-1.5 sm:gap-2 group min-w-0">
-          <span className="text-xl sm:text-2xl">🏛️</span>
+          <Image src="/shanyrak.svg" alt="" width={28} height={28} className="w-6 h-6 sm:w-7 sm:h-7" />
           <span className="font-serif font-bold text-base sm:text-lg text-night group-hover:text-turquoise transition-colors truncate">
             {t('appName')}
           </span>

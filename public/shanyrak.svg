@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Outer ring -->
+  <circle cx="60" cy="60" r="54" stroke="#d4a017" stroke-width="4"/>
+  <circle cx="60" cy="60" r="48" stroke="#d4a017" stroke-width="1.5"/>
+  <!-- Central cross (tunduk) -->
+  <line x1="60" y1="20" x2="60" y2="100" stroke="#d4a017" stroke-width="3" stroke-linecap="round"/>
+  <line x1="20" y1="60" x2="100" y2="60" stroke="#d4a017" stroke-width="3" stroke-linecap="round"/>
+  <!-- Diagonal spokes -->
+  <line x1="31.7" y1="31.7" x2="88.3" y2="88.3" stroke="#d4a017" stroke-width="2" stroke-linecap="round"/>
+  <line x1="88.3" y1="31.7" x2="31.7" y2="88.3" stroke="#d4a017" stroke-width="2" stroke-linecap="round"/>
+  <!-- Secondary spokes -->
+  <line x1="60" y1="12" x2="60" y2="20" stroke="#d4a017" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="60" y1="100" x2="60" y2="108" stroke="#d4a017" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="12" y1="60" x2="20" y2="60" stroke="#d4a017" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="100" y1="60" x2="108" y2="60" stroke="#d4a017" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Curved lattice arcs between spokes (uyk) -->
+  <path d="M60 20 Q45 40 31.7 31.7" stroke="#d4a017" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M60 20 Q75 40 88.3 31.7" stroke="#d4a017" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M100 60 Q80 45 88.3 31.7" stroke="#d4a017" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M100 60 Q80 75 88.3 88.3" stroke="#d4a017" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M60 100 Q75 80 88.3 88.3" stroke="#d4a017" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M60 100 Q45 80 31.7 88.3" stroke="#d4a017" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M20 60 Q40 75 31.7 88.3" stroke="#d4a017" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M20 60 Q40 45 31.7 31.7" stroke="#d4a017" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- Center circle -->
+  <circle cx="60" cy="60" r="8" stroke="#d4a017" stroke-width="2.5" fill="#d4a017" fill-opacity="0.15"/>
+  <!-- Spoke end dots -->
+  <circle cx="60" cy="12" r="3" fill="#d4a017"/>
+  <circle cx="60" cy="108" r="3" fill="#d4a017"/>
+  <circle cx="12" cy="60" r="3" fill="#d4a017"/>
+  <circle cx="108" cy="60" r="3" fill="#d4a017"/>
+  <circle cx="25.5" cy="25.5" r="2.5" fill="#d4a017"/>
+  <circle cx="94.5" cy="25.5" r="2.5" fill="#d4a017"/>
+  <circle cx="94.5" cy="94.5" r="2.5" fill="#d4a017"/>
+  <circle cx="25.5" cy="94.5" r="2.5" fill="#d4a017"/>
+</svg>

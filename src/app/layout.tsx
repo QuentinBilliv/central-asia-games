@@ -21,6 +21,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Central Asia Games',
   description: 'Play board games online with friends - Azul & Petits Chevaux',
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export default async function RootLayout({
