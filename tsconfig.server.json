@@ -13,6 +13,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["server.ts", "src/server/**/*.ts", "src/game-logic/**/*.ts", "src/socket/events.ts"],
+  "include": ["server.ts", "server-socket.ts", "src/server/**/*.ts", "src/game-logic/**/*.ts", "src/socket/events.ts"],
   "exclude": ["node_modules"]
 }

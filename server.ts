@@ -11,6 +11,7 @@ const port = parseInt(process.env.PORT || '3000', 10);
 const ALLOWED_ORIGINS: string[] = [
   'http://localhost:3000',
   'https://steppegames.vercel.app',
+  'https://central-asia-games-production.up.railway.app',
 ];
 if (process.env.FRONTEND_URL) {
   ALLOWED_ORIGINS.push(process.env.FRONTEND_URL);

@@ -4,7 +4,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-RUN npm run build
+RUN npm run build:server
 
 # Stage 2: Production
 FROM node:20-alpine AS runner
@@ -13,10 +13,7 @@ ENV NODE_ENV=production
 
 COPY --from=builder /app/package*.json ./
 RUN npm ci --omit=dev
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/public ./public
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/messages ./messages
 
 EXPOSE 3000
-CMD ["npm", "start"]
+CMD ["npm", "run", "start:socket"]
