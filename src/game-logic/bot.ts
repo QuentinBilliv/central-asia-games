@@ -4,6 +4,8 @@ import {
   AzulTileColor,
   PetitsChevauxGameState,
   PetitsChevauxMove,
+  BurkutBoriGameState,
+  BurkutBoriMove,
 } from './types';
 import { getWallColumn } from './azul/scoring';
 import { getValidMoves } from './petitsChevaux/moves';
@@ -100,4 +102,15 @@ export function pickPetitsChevauxBotMove(
 
   const horseId = validHorses[Math.floor(Math.random() * validHorses.length)];
   return { type: 'moveHorse', horseId };
+}
+
+/**
+ * Pick a move for a Bürküt & Böri bot.
+ * Only action is rolling the die.
+ */
+export function pickBurkutBoriBotMove(
+  _state: BurkutBoriGameState,
+  _playerId: string
+): BurkutBoriMove {
+  return { type: 'roll' };
 }

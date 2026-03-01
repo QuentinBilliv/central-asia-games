@@ -2,11 +2,14 @@ import { ComponentType } from 'react';
 import { GameType, Player } from '@/game-logic/types';
 import AzulBoard from '@/components/azul/AzulBoard';
 import PetitsChevauxBoard from '@/components/petitsChevaux/PetitsChevauxBoard';
+import BurkutBoriBoard from '@/components/burkutBori/BurkutBoriBoard';
 import { createInitialState as createAzulState } from '@/game-logic/azul/state';
 import { validateAndApplyMove as azulApplyMove } from '@/game-logic/azul/moves';
 import { createInitialState as createPCState } from '@/game-logic/petitsChevaux/state';
 import { validateAndApplyMove as pcApplyMove } from '@/game-logic/petitsChevaux/moves';
-import { pickAzulBotMove, pickPetitsChevauxBotMove } from '@/game-logic/bot';
+import { createInitialState as createBBState } from '@/game-logic/burkutBori/state';
+import { validateAndApplyMove as bbApplyMove } from '@/game-logic/burkutBori/moves';
+import { pickAzulBotMove, pickPetitsChevauxBotMove, pickBurkutBoriBotMove } from '@/game-logic/bot';
 
 export interface GameBoardProps {
   gameState: any;
@@ -38,6 +41,13 @@ export const clientGameRegistry: Record<GameType, ClientGameEntry> = {
     createInitialState: createPCState,
     validateAndApplyMove: pcApplyMove,
     pickBotMove: pickPetitsChevauxBotMove,
+    isGameOver: (state) => state.winner != null,
+  },
+  burkutBori: {
+    Board: BurkutBoriBoard as ComponentType<GameBoardProps>,
+    createInitialState: createBBState,
+    validateAndApplyMove: bbApplyMove,
+    pickBotMove: pickBurkutBoriBotMove,
     isGameOver: (state) => state.winner != null,
   },
 };

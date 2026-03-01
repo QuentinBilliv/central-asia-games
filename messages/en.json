@@ -33,6 +33,11 @@
       "title": "Horse Race",
       "description": "A horse race across the Central Asian steppes",
       "players": "2-4 players"
+    },
+    "burkutBori": {
+      "title": "Eagles & Wolves",
+      "description": "Golden eagles lift you up, grey wolves bring you down across 100 cells",
+      "players": "2-4 players"
     }
   },
   "lobby": {
@@ -89,6 +94,21 @@
     "stable": "Stable",
     "finish": "Finish",
     "horsesHome": "{count} horses home"
+  },
+  "burkutBori": {
+    "title": "Eagles & Wolves",
+    "yourTurn": "Your turn",
+    "opponentTurn": "{name}'s turn",
+    "rollDice": "Roll dice",
+    "extraTurn": "Extra turn!",
+    "winner": "{name} wins!",
+    "eagle": "Eagle!",
+    "wolf": "Wolf!",
+    "position": "Cell",
+    "start": "Start",
+    "finish": "Finish",
+    "offBoard": "Off board",
+    "cell": "Cell {n}"
   },
   "local": {
     "title": "Local Game",

@@ -1,6 +1,6 @@
 // Shared types for all games
 
-export const GAME_TYPES = ['azul', 'petitsChevaux'] as const;
+export const GAME_TYPES = ['azul', 'petitsChevaux', 'burkutBori'] as const;
 export type GameType = (typeof GAME_TYPES)[number];
 export type GameStatus = 'waiting' | 'playing' | 'finished';
 
@@ -17,7 +17,7 @@ export interface Room {
   players: Player[];
   hostId: string;
   status: GameStatus;
-  gameState: AzulGameState | PetitsChevauxGameState | null;
+  gameState: AzulGameState | PetitsChevauxGameState | BurkutBoriGameState | null;
   createdAt: number;
   lastActivity: number;
   maxPlayers: number;
@@ -109,4 +109,35 @@ export interface PetitsChevauxGameState {
 export interface PetitsChevauxMove {
   type: 'roll' | 'moveHorse';
   horseId?: number; // which horse to move (for moveHorse)
+}
+
+// ===== Bürküt & Böri (Eagles & Wolves) Types =====
+
+export interface BurkutBoriPlayer {
+  playerId: string;
+  playerIndex: number;
+  position: number; // 0 = off-board, 1-100 on board
+}
+
+export interface BurkutBoriLastMove {
+  playerId: string;
+  diceValue: number;
+  from: number;
+  to: number;
+  intermediatePosition: number | null; // cell before eagle/wolf redirect
+  hitEagle: boolean;
+  hitWolf: boolean;
+}
+
+export interface BurkutBoriGameState {
+  type: 'burkutBori';
+  players: BurkutBoriPlayer[];
+  currentPlayerIndex: number;
+  turnOrder: string[];
+  winner: string | null;
+  lastMove: BurkutBoriLastMove | null;
+}
+
+export interface BurkutBoriMove {
+  type: 'roll';
 }

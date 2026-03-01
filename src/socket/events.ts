@@ -18,6 +18,8 @@ export const PetitsChevauxMoveSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('moveHorse'), horseId: z.number().int().min(0).max(3) }),
 ]);
 
+export const BurkutBoriMoveSchema = z.object({ type: z.literal('roll') });
+
 // Client -> Server events
 export const JoinRoomSchema = z.object({
   roomId: z.string().min(1).max(20),

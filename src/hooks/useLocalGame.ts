@@ -62,13 +62,24 @@ export function useLocalGame(gameType: GameType, localPlayers: LocalPlayer[]) {
     const currentLocal = localPlayers.find((lp) => lp.id === currentId);
     if (!currentLocal?.isBot) return;
 
+    // Compute delay so the bot waits for any step-by-step animation to finish.
+    // BurkutBori: 650ms dice spin/reveal + 280ms/step + eagle/wolf pause.
+    let delay = 800;
+    if (gameState.type === 'burkutBori' && gameState.lastMove) {
+      const lm = gameState.lastMove;
+      delay = 600 + lm.diceValue * 300 + 500;
+      if (lm.hitEagle || lm.hitWolf) {
+        delay += 1000;
+      }
+    }
+
     botTimeoutRef.current = setTimeout(() => {
       const move = handler.pickBotMove(gameState, currentId);
 
       if (move) {
         sendMove(move);
       }
-    }, 800);
+    }, delay);
 
     return () => {
       if (botTimeoutRef.current) {

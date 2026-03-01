@@ -63,7 +63,7 @@ export default function LocalSetupPage() {
         </div>
 
         {/* Game selection */}
-        <div className="grid grid-cols-2 gap-3 sm:gap-4 max-w-md w-full mb-6 sm:mb-8">
+        <div className="grid grid-cols-3 gap-3 sm:gap-4 max-w-xl w-full mb-6 sm:mb-8">
           <Card
             variant="game"
             className={`cursor-pointer text-center p-3 sm:p-4 transition-all ${
@@ -106,6 +106,34 @@ export default function LocalSetupPage() {
             </div>
             <h3 className="font-serif font-bold text-night text-sm sm:text-base">
               {t('home.petitsChevaux.title')}
+            </h3>
+          </Card>
+
+          <Card
+            variant="game"
+            className={`cursor-pointer text-center p-3 sm:p-4 transition-all ${
+              selectedGame === 'burkutBori'
+                ? 'ring-2 ring-turquoise border-turquoise'
+                : ''
+            }`}
+            onClick={() => setSelectedGame('burkutBori')}
+          >
+            <div className="h-14 sm:h-16 bg-gradient-to-br from-[#1a1a2e] to-[#2d1b69] rounded-lg mb-2 sm:mb-3 flex items-center justify-center gap-1.5">
+              <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M12 2 C10 6 4 8 2 12 C4 11 6 11 8 12 C6 14 5 18 6 22 C8 19 10 17 12 16 C14 17 16 19 18 22 C19 18 18 14 16 12 C18 11 20 11 22 12 C20 8 14 6 12 2Z"
+                  fill="#d4a017" opacity="0.9"
+                />
+              </svg>
+              <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M4 4 L6 10 C6 10 3 14 3 18 C3 20 5 22 8 22 L10 22 L11 18 L12 22 L13 18 L14 22 L16 22 C19 22 21 20 21 18 C21 14 18 10 18 10 L20 4 L16 8 C14 7 10 7 8 8 Z"
+                  fill="#9ca3af" opacity="0.85"
+                />
+              </svg>
+            </div>
+            <h3 className="font-serif font-bold text-night text-sm sm:text-base">
+              {t('home.burkutBori.title')}
             </h3>
           </Card>
         </div>

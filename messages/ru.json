@@ -33,6 +33,11 @@
       "title": "Лошадки",
       "description": "Скачки по степям Центральной Азии",
       "players": "2-4 игрока"
+    },
+    "burkutBori": {
+      "title": "Орлы и Волки",
+      "description": "Золотые орлы поднимают вас, серые волки спускают на 100 клетках",
+      "players": "2-4 игрока"
     }
   },
   "lobby": {
@@ -89,6 +94,21 @@
     "stable": "Конюшня",
     "finish": "Финиш",
     "horsesHome": "{count} лошадей на финише"
+  },
+  "burkutBori": {
+    "title": "Орлы и Волки",
+    "yourTurn": "Ваш ход",
+    "opponentTurn": "Ход {name}",
+    "rollDice": "Бросить кубик",
+    "extraTurn": "Доп. ход!",
+    "winner": "{name} победил!",
+    "eagle": "Орёл!",
+    "wolf": "Волк!",
+    "position": "Клетка",
+    "start": "Старт",
+    "finish": "Финиш",
+    "offBoard": "За полем",
+    "cell": "Клетка {n}"
   },
   "local": {
     "title": "Локальная игра",

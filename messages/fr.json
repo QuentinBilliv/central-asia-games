@@ -33,6 +33,11 @@
       "title": "Petits Chevaux",
       "description": "Course de chevaux à travers les steppes d'Asie centrale",
       "players": "2-4 joueurs"
+    },
+    "burkutBori": {
+      "title": "Aigles & Loups",
+      "description": "Les aigles dorés vous élèvent, les loups gris vous font descendre sur 100 cases",
+      "players": "2-4 joueurs"
     }
   },
   "lobby": {
@@ -89,6 +94,21 @@
     "stable": "Écurie",
     "finish": "Arrivée",
     "horsesHome": "{count} chevaux à l'arrivée"
+  },
+  "burkutBori": {
+    "title": "Aigles & Loups",
+    "yourTurn": "C'est votre tour",
+    "opponentTurn": "Tour de {name}",
+    "rollDice": "Lancer le dé",
+    "extraTurn": "Tour bonus !",
+    "winner": "{name} a gagné !",
+    "eagle": "Aigle !",
+    "wolf": "Loup !",
+    "position": "Case",
+    "start": "Départ",
+    "finish": "Arrivée",
+    "offBoard": "Hors plateau",
+    "cell": "Case {n}"
   },
   "local": {
     "title": "Partie locale",
