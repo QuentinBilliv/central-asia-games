@@ -2,6 +2,7 @@ import { AzulMoveSchema } from '../../socket/events';
 import { createInitialState } from '../../game-logic/azul/state';
 import { validateAndApplyMove } from '../../game-logic/azul/moves';
 import { AzulGameState } from '../../game-logic/types';
+import { pickAzulBotMove } from '../../game-logic/bot';
 import { GameHandler } from './types';
 
 export const azulHandler: GameHandler = {
@@ -15,4 +16,5 @@ export const azulHandler: GameHandler = {
   isGameOver(state: AzulGameState) {
     return state.winner != null || state.gameOver;
   },
+  pickBotMove: pickAzulBotMove,
 };

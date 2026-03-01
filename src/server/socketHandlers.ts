@@ -7,12 +7,7 @@ import {
   GameMoveSchema,
 } from '../socket/events';
 import { gameHandlers } from './gameHandlers';
-import { Room, BurkutBoriGameState, PetitsChevauxGameState, AzulGameState } from '../game-logic/types';
-import {
-  pickBurkutBoriBotMove,
-  pickPetitsChevauxBotMove,
-  pickAzulBotMove,
-} from '../game-logic/bot';
+import { Room } from '../game-logic/types';
 
 // ─── Authenticated socket helpers ───
 
@@ -329,15 +324,7 @@ function autoPlayForDisconnected(
     // Only auto-play if the current player is disconnected
     if (!currentPlayer || currentPlayer.connected) return;
 
-    // Pick a bot move based on game type
-    let move: any = null;
-    if (room.gameType === 'burkutBori') {
-      move = pickBurkutBoriBotMove(room.gameState as BurkutBoriGameState, currentPlayerId);
-    } else if (room.gameType === 'petitsChevaux') {
-      move = pickPetitsChevauxBotMove(room.gameState as PetitsChevauxGameState, currentPlayerId);
-    } else if (room.gameType === 'azul') {
-      move = pickAzulBotMove(room.gameState as AzulGameState, currentPlayerId);
-    }
+    const move = handler.pickBotMove(room.gameState, currentPlayerId);
 
     if (!move) return;
 
