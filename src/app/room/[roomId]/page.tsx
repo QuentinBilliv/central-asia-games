@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import Header from '@/components/layout/Header';
@@ -12,13 +12,10 @@ import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 import { useGameSocket } from '@/socket/useGameSocket';
 import { useLobbyStore } from '@/store/useLobbyStore';
-import { useAzulStore } from '@/store/useAzulStore';
-import { usePetitsChevauxStore } from '@/store/usePetitsChevauxStore';
 import { SERVER_EVENTS } from '@/socket/events';
 import { getSocket } from '@/socket/client';
-import AzulBoard from '@/components/azul/AzulBoard';
-import PetitsChevauxBoard from '@/components/petitsChevaux/PetitsChevauxBoard';
 import { GameType } from '@/game-logic/types';
+import { clientGameRegistry } from '@/client/gameRegistry';
 
 export default function RoomPage() {
   const params = useParams();
@@ -31,11 +28,11 @@ export default function RoomPage() {
     useGameSocket(roomId);
 
   const { players, hostId, status, gameType, joined, error } = useLobbyStore();
-  const azulStore = useAzulStore();
-  const pcStore = usePetitsChevauxStore();
+  const [gameState, setGameState] = useState<any>(null);
 
   // Effective game type: from lobby state or URL
   const effectiveGameType = gameType || gameTypeFromUrl;
+  const { Board } = clientGameRegistry[effectiveGameType];
 
   // Listen for game events
   useEffect(() => {
@@ -51,37 +48,18 @@ export default function RoomPage() {
         hostId: useLobbyStore.getState().hostId,
         maxPlayers: 4,
       });
-
-      if (data.gameState.type === 'azul') {
-        azulStore.setGameState(data.gameState);
-      } else {
-        pcStore.setGameState(data.gameState);
-      }
+      setGameState(data.gameState);
     };
 
-    const handleGameStateUpdate = (data: any) => {
-      if (data.type === 'azul') {
-        azulStore.setGameState(data);
-      } else {
-        pcStore.setGameState(data);
-      }
-    };
-
-    const handleGameOver = (data: any) => {
-      if (data.gameState.type === 'azul') {
-        azulStore.setGameState(data.gameState);
-      } else {
-        pcStore.setGameState(data.gameState);
-      }
-    };
+    const handleGameOver = (data: any) => setGameState(data.gameState);
 
     socket.on(SERVER_EVENTS.GAME_STARTED, handleGameStarted);
-    socket.on(SERVER_EVENTS.GAME_STATE_UPDATE, handleGameStateUpdate);
+    socket.on(SERVER_EVENTS.GAME_STATE_UPDATE, setGameState);
     socket.on(SERVER_EVENTS.GAME_OVER, handleGameOver);
 
     return () => {
       socket.off(SERVER_EVENTS.GAME_STARTED, handleGameStarted);
-      socket.off(SERVER_EVENTS.GAME_STATE_UPDATE, handleGameStateUpdate);
+      socket.off(SERVER_EVENTS.GAME_STATE_UPDATE, setGameState);
       socket.off(SERVER_EVENTS.GAME_OVER, handleGameOver);
     };
   }, [roomId, effectiveGameType]);
@@ -94,31 +72,21 @@ export default function RoomPage() {
   const canStart = isHost && players.length >= 2;
 
   // Render game if playing
-  if (status === 'playing' || azulStore.gameState || pcStore.gameState) {
-    const isAzul = effectiveGameType === 'azul' || !!azulStore.gameState;
+  if (status === 'playing' || gameState) {
     return (
       <div className="min-h-screen flex flex-col bg-night">
         <Header />
         <main className="flex-1 relative">
-          {isAzul && azulStore.gameState ? (
-            <AzulBoard
-              gameState={azulStore.gameState}
+          {gameState && (
+            <Board
+              gameState={gameState}
               playerId={playerId}
               players={players}
               onMove={sendMove}
               onRestart={restartGame}
               isHost={isHost}
             />
-          ) : pcStore.gameState ? (
-            <PetitsChevauxBoard
-              gameState={pcStore.gameState}
-              playerId={playerId}
-              players={players}
-              onMove={sendMove}
-              onRestart={restartGame}
-              isHost={isHost}
-            />
-          ) : null}
+          )}
         </main>
       </div>
     );

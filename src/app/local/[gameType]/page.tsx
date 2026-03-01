@@ -5,8 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { GameType } from '@/game-logic/types';
 import { useLocalGame, LocalPlayer } from '@/hooks/useLocalGame';
-import AzulBoard from '@/components/azul/AzulBoard';
-import PetitsChevauxBoard from '@/components/petitsChevaux/PetitsChevauxBoard';
+import { clientGameRegistry } from '@/client/gameRegistry';
 import TurnTransitionScreen from '@/components/local/TurnTransitionScreen';
 import Button from '@/components/ui/Button';
 
@@ -15,6 +14,7 @@ export default function LocalGamePage() {
   const router = useRouter();
   const t = useTranslations('local');
   const gameType = params.gameType as GameType;
+  const { Board } = clientGameRegistry[gameType];
 
   const [localPlayers, setLocalPlayers] = useState<LocalPlayer[] | null>(null);
   const [showTransition, setShowTransition] = useState(false);
@@ -109,25 +109,14 @@ export default function LocalGamePage() {
       )}
 
       {/* Game board */}
-      {gameType === 'azul' ? (
-        <AzulBoard
-          gameState={gameState as any}
-          playerId={activePlayerId!}
-          players={players}
-          onMove={sendMove}
-          onRestart={restartGame}
-          isHost={true}
-        />
-      ) : (
-        <PetitsChevauxBoard
-          gameState={gameState as any}
-          playerId={activePlayerId!}
-          players={players}
-          onMove={sendMove}
-          onRestart={restartGame}
-          isHost={true}
-        />
-      )}
+      <Board
+        gameState={gameState}
+        playerId={activePlayerId!}
+        players={players}
+        onMove={sendMove}
+        onRestart={restartGame}
+        isHost={true}
+      />
     </div>
   );
 }

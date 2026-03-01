@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { nanoid } from 'nanoid';
+import { GAME_TYPES } from '@/game-logic/types';
 
 // Note: The actual room creation happens via Socket.IO.
 // This API route creates the room ID and returns it.
@@ -14,7 +15,7 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { gameType } = body;
 
-    if (!gameType || !['azul', 'petitsChevaux'].includes(gameType)) {
+    if (!gameType || !(GAME_TYPES as readonly string[]).includes(gameType)) {
       return NextResponse.json(
         { error: 'Invalid game type' },
         { status: 400 }

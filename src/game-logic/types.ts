@@ -1,6 +1,7 @@
 // Shared types for all games
 
-export type GameType = 'azul' | 'petitsChevaux';
+export const GAME_TYPES = ['azul', 'petitsChevaux'] as const;
+export type GameType = (typeof GAME_TYPES)[number];
 export type GameStatus = 'waiting' | 'playing' | 'finished';
 
 export interface Player {

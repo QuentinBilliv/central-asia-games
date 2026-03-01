@@ -9,13 +9,14 @@ import CentralAsianPattern from '@/components/layout/CentralAsianPattern';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
+import { GameType } from '@/game-logic/types';
 
 export default function HomePage() {
   const t = useTranslations();
   const router = useRouter();
-  const [selectedGame, setSelectedGame] = useState<'azul' | 'petitsChevaux' | null>(null);
+  const [selectedGame, setSelectedGame] = useState<GameType | null>(null);
 
-  const createGame = async (gameType: 'azul' | 'petitsChevaux') => {
+  const createGame = async (gameType: GameType) => {
     try {
       const res = await fetch('/api/room', {
         method: 'POST',
@@ -98,7 +99,7 @@ export default function HomePage() {
                     <div className="absolute left-1 top-1/2 -translate-y-1/2 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-turquoise shadow transform -rotate-45" />
                     <div className="absolute right-1 top-1/2 -translate-y-1/2 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-gold shadow transform -rotate-45" />
                   </div>
-                  <div className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-lg shadow-lg flex items-center justify-center transform group-hover:rotate-[360deg] transition-transform duration-700">
+                  <div className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-lg shadow-lg flex items-center justify-center">
                     <span className="text-base sm:text-lg font-bold text-night">6</span>
                   </div>
                 </div>

@@ -1,19 +1,8 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
-import {
-  GameType,
-  Player,
-  AzulGameState,
-  AzulMove,
-  PetitsChevauxGameState,
-  PetitsChevauxMove,
-} from '@/game-logic/types';
-import { createInitialState as createAzulState } from '@/game-logic/azul/state';
-import { validateAndApplyMove as azulApplyMove } from '@/game-logic/azul/moves';
-import { createInitialState as createPCState } from '@/game-logic/petitsChevaux/state';
-import { validateAndApplyMove as pcApplyMove } from '@/game-logic/petitsChevaux/moves';
-import { pickAzulBotMove, pickPetitsChevauxBotMove } from '@/game-logic/bot';
+import { GameType, Player } from '@/game-logic/types';
+import { clientGameRegistry } from '@/client/gameRegistry';
 
 export interface LocalPlayer {
   id: string;
@@ -22,12 +11,12 @@ export interface LocalPlayer {
   index: number;
 }
 
-type GameState = AzulGameState | PetitsChevauxGameState;
-
 export function useLocalGame(gameType: GameType, localPlayers: LocalPlayer[]) {
-  const [gameState, setGameState] = useState<GameState | null>(null);
+  const [gameState, setGameState] = useState<any>(null);
   const [previousPlayerId, setPreviousPlayerId] = useState<string | null>(null);
   const botTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handler = clientGameRegistry[gameType];
 
   const players: Player[] = localPlayers.map((lp) => ({
     id: lp.id,
@@ -41,42 +30,24 @@ export function useLocalGame(gameType: GameType, localPlayers: LocalPlayer[]) {
     : null;
 
   const startGame = useCallback(() => {
-    if (gameType === 'azul') {
-      setGameState(createAzulState(players));
-    } else {
-      setGameState(createPCState(players));
-    }
+    setGameState(handler.createInitialState(players));
     setPreviousPlayerId(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameType, JSON.stringify(localPlayers)]);
 
   const sendMove = useCallback(
-    (move: AzulMove | PetitsChevauxMove) => {
+    (move: any) => {
       if (!gameState || !activePlayerId) return;
 
       const prevId = activePlayerId;
-      let result;
-
-      if (gameType === 'azul') {
-        result = azulApplyMove(
-          gameState as AzulGameState,
-          activePlayerId,
-          move as AzulMove
-        );
-      } else {
-        result = pcApplyMove(
-          gameState as PetitsChevauxGameState,
-          activePlayerId,
-          move as PetitsChevauxMove
-        );
-      }
+      const result = handler.validateAndApplyMove(gameState, activePlayerId, move);
 
       if (result.valid) {
         setPreviousPlayerId(prevId);
         setGameState(result.state);
       }
     },
-    [gameState, activePlayerId, gameType]
+    [gameState, activePlayerId, handler]
   );
 
   const restartGame = useCallback(() => {
@@ -85,23 +56,14 @@ export function useLocalGame(gameType: GameType, localPlayers: LocalPlayer[]) {
 
   // Bot auto-play
   useEffect(() => {
-    if (!gameState || gameState.winner || ('gameOver' in gameState && gameState.gameOver)) return;
+    if (!gameState || handler.isGameOver(gameState)) return;
 
     const currentId = gameState.turnOrder[gameState.currentPlayerIndex];
     const currentLocal = localPlayers.find((lp) => lp.id === currentId);
     if (!currentLocal?.isBot) return;
 
     botTimeoutRef.current = setTimeout(() => {
-      let move: AzulMove | PetitsChevauxMove | null = null;
-
-      if (gameType === 'azul') {
-        move = pickAzulBotMove(gameState as AzulGameState, currentId);
-      } else {
-        move = pickPetitsChevauxBotMove(
-          gameState as PetitsChevauxGameState,
-          currentId
-        );
-      }
+      const move = handler.pickBotMove(gameState, currentId);
 
       if (move) {
         sendMove(move);
@@ -113,7 +75,7 @@ export function useLocalGame(gameType: GameType, localPlayers: LocalPlayer[]) {
         clearTimeout(botTimeoutRef.current);
       }
     };
-  }, [gameState, gameType, localPlayers, sendMove]);
+  }, [gameState, handler, localPlayers, sendMove]);
 
   return {
     gameState,

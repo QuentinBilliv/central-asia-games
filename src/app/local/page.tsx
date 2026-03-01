@@ -10,7 +10,7 @@ import Footer from '@/components/layout/Footer';
 import CentralAsianPattern from '@/components/layout/CentralAsianPattern';
 import Card from '@/components/ui/Card';
 import PlayerSetupForm, { PlayerConfig } from '@/components/local/PlayerSetupForm';
-import { GameType } from '@/game-logic/types';
+import { GameType, GAME_TYPES } from '@/game-logic/types';
 
 export default function LocalSetupPage() {
   const t = useTranslations();
@@ -18,7 +18,7 @@ export default function LocalSetupPage() {
   const searchParams = useSearchParams();
   const gameParam = searchParams.get('game');
   const [selectedGame, setSelectedGame] = useState<GameType | null>(
-    (gameParam === 'azul' || gameParam === 'petitsChevaux') ? gameParam : null
+    gameParam && (GAME_TYPES as readonly string[]).includes(gameParam) ? (gameParam as GameType) : null
   );
 
   const handleStart = (playerConfigs: PlayerConfig[]) => {

@@ -22,8 +22,7 @@ export function getPlayerId(): string {
 
   let id = sessionStorage.getItem('playerId');
   if (!id) {
-    // Generate a simple ID without importing nanoid (avoid ESM issues)
-    id = Math.random().toString(36).substring(2, 10) + Date.now().toString(36);
+    id = crypto.randomUUID();
     sessionStorage.setItem('playerId', id);
   }
   return id;
