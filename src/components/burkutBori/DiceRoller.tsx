@@ -47,7 +47,7 @@ export default function DiceRoller({ value, rolling, canRoll, onRoll }: DiceRoll
         disabled={!canRoll}
         aria-label={canRoll ? t('rollDice') : undefined}
         className={`
-          group relative w-[72px] h-[72px] rounded-2xl
+          group relative w-14 h-14 sm:w-[72px] sm:h-[72px] rounded-2xl
           transition-all duration-200 outline-none
           ${canRoll
             ? 'cursor-pointer hover:scale-110 active:scale-95 focus-visible:ring-2 focus-visible:ring-gold/60'
@@ -56,7 +56,7 @@ export default function DiceRoller({ value, rolling, canRoll, onRoll }: DiceRoll
         `}
       >
         {canRoll && (
-          <div className="absolute inset-[-6px] rounded-3xl bg-gold/15 blur-md group-hover:bg-gold/25 transition-all" />
+          <div className="absolute inset-[-4px] sm:inset-[-6px] rounded-3xl bg-gold/15 blur-md group-hover:bg-gold/25 transition-all" />
         )}
 
         <div

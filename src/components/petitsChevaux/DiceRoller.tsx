@@ -41,13 +41,13 @@ export default function DiceRoller({ value, rolling, canRoll, onRoll }: DiceRoll
       : '';
 
   return (
-    <div className="flex flex-col items-center gap-2.5">
+    <div className="flex flex-col items-center gap-1.5 sm:gap-2.5">
       <button
         onClick={canRoll ? onRoll : undefined}
         disabled={!canRoll}
         aria-label={canRoll ? t('rollDice') : undefined}
         className={`
-          group relative w-[72px] h-[72px] rounded-2xl
+          group relative w-[56px] h-[56px] sm:w-[72px] sm:h-[72px] rounded-xl sm:rounded-2xl
           transition-all duration-200 outline-none
           ${canRoll
             ? 'cursor-pointer hover:scale-110 active:scale-95 focus-visible:ring-2 focus-visible:ring-gold/60'
@@ -57,12 +57,12 @@ export default function DiceRoller({ value, rolling, canRoll, onRoll }: DiceRoll
       >
         {/* Glow behind dice when clickable */}
         {canRoll && (
-          <div className="absolute inset-[-6px] rounded-3xl bg-gold/15 blur-md group-hover:bg-gold/25 transition-all" />
+          <div className="absolute inset-[-4px] sm:inset-[-6px] rounded-2xl sm:rounded-3xl bg-gold/15 blur-md group-hover:bg-gold/25 transition-all" />
         )}
 
         <div
           className={`
-            relative w-full h-full rounded-2xl overflow-hidden
+            relative w-full h-full rounded-xl sm:rounded-2xl overflow-hidden
             bg-gradient-to-br from-[#faf8f0] via-white to-[#f0ebe0]
             shadow-[0_4px_16px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.9)]
             border border-gold/40
@@ -105,14 +105,14 @@ export default function DiceRoller({ value, rolling, canRoll, onRoll }: DiceRoll
       </button>
 
       {canRoll && (
-        <span className="text-xs text-turquoise-300 font-medium tracking-wide animate-pulse">
+        <span className="text-[10px] sm:text-xs text-turquoise-300 font-medium tracking-wide animate-pulse">
           {t('rollDice')}
         </span>
       )}
 
       {/* Display dice value when not rolling */}
       {value && !rolling && !canRoll && (
-        <span className="text-xs text-night-300 font-medium tabular-nums">
+        <span className="text-[10px] sm:text-xs text-night-300 font-medium tabular-nums">
           {value}
         </span>
       )}

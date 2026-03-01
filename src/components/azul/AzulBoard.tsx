@@ -128,12 +128,12 @@ export default function AzulBoard({
   const centerColors = [...new Set(gameState.center)];
 
   return (
-    <div className="flex flex-col gap-4 p-4 min-h-[calc(100vh-60px)] text-white">
-      <RegistanHeader />
+    <div className="flex flex-col gap-2 sm:gap-4 p-2 sm:p-4 min-h-[calc(100vh-60px)] text-white">
+      <div className="hidden sm:block"><RegistanHeader /></div>
 
       {/* Status bar */}
-      <div className="flex items-center justify-between bg-night-800/60 backdrop-blur-sm rounded-xl px-5 py-3 border border-night-600/50">
-        <div className="text-sm font-medium">
+      <div className="flex items-center justify-between bg-night-800/60 backdrop-blur-sm rounded-xl px-3 py-2 sm:px-5 sm:py-3 border border-night-600/50">
+        <div className="text-xs sm:text-sm font-medium">
           {gameState.gameOver ? (
             gameState.winner ? (
               <span className="text-gold font-bold text-base">
@@ -173,7 +173,7 @@ export default function AzulBoard({
         <div className="absolute top-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-turquoise/30 to-transparent" />
         <div className="absolute bottom-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-turquoise/30 to-transparent" />
 
-        <div className="flex flex-wrap gap-3 justify-center items-center">
+        <div className="flex flex-wrap gap-1.5 sm:gap-3 justify-center items-center">
           {gameState.factories.map((factory) => (
             <FactoryDisplay
               key={factory.id}
@@ -187,7 +187,7 @@ export default function AzulBoard({
 
           {/* Center pool */}
           {gameState.center.length > 0 && (
-            <div className="relative px-4 py-3 rounded-2xl bg-night-800/40 border border-night-600/30 min-w-[120px]">
+            <div className="relative px-2.5 py-2 sm:px-4 sm:py-3 rounded-2xl bg-night-800/40 border border-night-600/30 min-w-[80px] sm:min-w-[120px]">
               <div className="text-[10px] text-night-400 mb-2 text-center uppercase tracking-widest font-medium">
                 {t('center')}
               </div>
@@ -200,14 +200,14 @@ export default function AzulBoard({
                     <button
                       key={color}
                       onClick={() => isMyTurn && handleFactoryClick('center', -1, color)}
-                      className={`relative w-10 h-10 rounded-lg transition-all duration-200 ${
+                      className={`relative w-7 h-7 sm:w-10 sm:h-10 rounded-md sm:rounded-lg transition-all duration-200 ${
                         isMyTurn ? 'hover:scale-110 cursor-pointer' : ''
                       } ${isSelected ? 'ring-2 ring-white ring-offset-1 ring-offset-night scale-110' : ''}`}
                       style={centerTileStyle(color)}
                       disabled={!isMyTurn}
                     >
                       {count > 1 && (
-                        <span className="absolute -top-1.5 -right-1.5 text-[10px] bg-white text-night-800 rounded-full w-[18px] h-[18px] flex items-center justify-center font-bold shadow-sm">
+                        <span className="absolute -top-1 -right-1 sm:-top-1.5 sm:-right-1.5 text-[8px] sm:text-[10px] bg-white text-night-800 rounded-full w-[14px] h-[14px] sm:w-[18px] sm:h-[18px] flex items-center justify-center font-bold shadow-sm">
                           {count}
                         </span>
                       )}
@@ -229,7 +229,7 @@ export default function AzulBoard({
       </div>
 
       {/* Player boards */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-4">
         {gameState.playerBoards.map((board) => {
             const player = players.find((p) => p.id === board.playerId);
             const isCurrentTurn = currentPlayerTurnId === board.playerId;

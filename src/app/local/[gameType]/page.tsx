@@ -85,9 +85,9 @@ export default function LocalGamePage() {
   }
 
   return (
-    <div className="min-h-screen bg-night relative">
+    <div className="min-h-screen bg-night relative p-2 sm:p-4">
       {/* Back link */}
-      <div className="absolute top-3 left-3 z-20">
+      <div className="absolute top-4 left-4 sm:top-3 sm:left-3 z-20">
         <Button
           variant="ghost"
           size="sm"
@@ -109,14 +109,16 @@ export default function LocalGamePage() {
       )}
 
       {/* Game board */}
-      <Board
-        gameState={gameState}
-        playerId={activePlayerId!}
-        players={players}
-        onMove={sendMove}
-        onRestart={restartGame}
-        isHost={true}
-      />
+      <div className="flex items-center justify-center min-h-[calc(100vh-16px)] sm:min-h-[calc(100vh-32px)]">
+        <Board
+          gameState={gameState}
+          playerId={activePlayerId!}
+          players={players}
+          onMove={sendMove}
+          onRestart={restartGame}
+          isHost={true}
+        />
+      </div>
     </div>
   );
 }

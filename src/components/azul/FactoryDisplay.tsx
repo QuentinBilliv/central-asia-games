@@ -13,6 +13,7 @@ interface Props {
 
 /**
  * Uzbek ceramic plate SVG border — concentric rings with dotted motifs.
+ * Uses a viewBox so it scales with the container.
  */
 function CeramicPlateBorder({ isSelected }: { isSelected: boolean }) {
   const accent = isSelected ? '#5eead4' : '#d4a017';
@@ -20,7 +21,7 @@ function CeramicPlateBorder({ isSelected }: { isSelected: boolean }) {
     <svg
       aria-hidden="true"
       viewBox="0 0 130 130"
-      className="absolute inset-0 w-full h-full pointer-events-none"
+      className="absolute inset-0 w-full h-full pointer-events-none hidden sm:block"
     >
       <circle cx="65" cy="65" r="62" fill="none" stroke={accent} strokeWidth={isSelected ? 2.5 : 1.5} opacity={isSelected ? 1 : 0.6} />
       <circle cx="65" cy="65" r="57" fill="none" stroke="#0d9488" strokeWidth="0.8" strokeDasharray="3 3" opacity="0.4" />
@@ -67,7 +68,7 @@ export default function FactoryDisplay({
 
   return (
     <div
-      className={`relative w-[130px] h-[130px] flex items-center justify-center transition-all duration-300 ${
+      className={`relative w-[80px] h-[80px] sm:w-[130px] sm:h-[130px] flex items-center justify-center transition-all duration-300 ${
         isThisFactorySelected ? 'scale-105' : isMyTurn ? 'hover:scale-[1.03]' : ''
       }`}
       style={{
@@ -79,14 +80,14 @@ export default function FactoryDisplay({
     >
       <CeramicPlateBorder isSelected={isThisFactorySelected} />
 
-      <div className="grid grid-cols-2 gap-2 relative z-10">
+      <div className="grid grid-cols-2 gap-1 sm:gap-2 relative z-10">
         {factory.tiles.map((color, i) => {
           const isSelected = isThisFactorySelected && selectedColor === color;
           return (
             <button
               key={i}
               onClick={() => isMyTurn && onTileClick(color)}
-              className={`w-10 h-10 rounded-lg transition-all duration-200 ${
+              className={`w-7 h-7 sm:w-10 sm:h-10 rounded-md sm:rounded-lg transition-all duration-200 ${
                 isMyTurn ? 'hover:scale-110 hover:brightness-110 cursor-pointer' : ''
               } ${isSelected ? 'ring-2 ring-white ring-offset-1 ring-offset-night scale-110' : ''}`}
               style={tileGlaze(color)}

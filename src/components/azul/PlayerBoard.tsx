@@ -153,7 +153,7 @@ export default function PlayerBoard({
 
   return (
     <div
-      className={`rounded-xl p-4 border-2 transition-all duration-300 ${
+      className={`rounded-xl p-2.5 sm:p-4 border-2 transition-all duration-300 ${
         isCurrentTurn
           ? 'border-turquoise bg-night-700'
           : 'border-night-600 bg-night-700/80'
@@ -162,31 +162,33 @@ export default function PlayerBoard({
         animation: 'azul-turn-glow 2.5s ease-in-out infinite',
       } : undefined}
     >
-      {/* Mihrab arch header */}
-      <MihrabArch isActive={isCurrentTurn} />
+      {/* Mihrab arch header — hidden on mobile */}
+      <div className="hidden sm:block">
+        <MihrabArch isActive={isCurrentTurn} />
+      </div>
 
       {/* Player header */}
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2">
-          <span className="font-serif font-bold text-white text-lg leading-tight">
+      <div className="flex items-center justify-between mb-2 sm:mb-4">
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <span className="font-serif font-bold text-white text-sm sm:text-lg leading-tight">
             {playerName}
           </span>
           {isMe && (
-            <span className="text-[10px] uppercase tracking-wider text-turquoise/80 font-medium">
+            <span className="text-[9px] sm:text-[10px] uppercase tracking-wider text-turquoise/80 font-medium">
               {tCommon('you')}
             </span>
           )}
         </div>
-        <div className="flex items-center gap-1.5 bg-night-800/60 rounded-lg px-3 py-1.5">
-          <span className="text-xs text-night-300 uppercase tracking-wider">{t('score')}</span>
-          <span className="text-xl font-bold text-gold tabular-nums">{board.score}</span>
+        <div className="flex items-center gap-1 sm:gap-1.5 bg-night-800/60 rounded-lg px-2 py-1 sm:px-3 sm:py-1.5">
+          <span className="text-[10px] sm:text-xs text-night-300 uppercase tracking-wider">{t('score')}</span>
+          <span className="text-base sm:text-xl font-bold text-gold tabular-nums">{board.score}</span>
         </div>
       </div>
 
-      <div className="flex gap-3 items-start">
+      <div className="flex gap-1.5 sm:gap-3 items-start">
         {/* Pattern Lines (left) */}
-        <div className="flex flex-col gap-1.5 flex-shrink-0">
-          <MosaicBorderLine />
+        <div className="flex flex-col gap-1 sm:gap-1.5 flex-shrink-0">
+          <div className="hidden sm:block"><MosaicBorderLine /></div>
 
           {board.patternLines.map((line, rowIndex) => {
             const valid = hasSelection && isLineValid(board, rowIndex, selectedColor);
@@ -196,7 +198,7 @@ export default function PlayerBoard({
               <button
                 key={rowIndex}
                 onClick={() => valid && onPatternLineClick?.(rowIndex)}
-                className={`flex gap-1 justify-end items-center py-0.5 rounded-md transition-all duration-200 ${
+                className={`flex gap-0.5 sm:gap-1 justify-end items-center py-0.5 rounded-md transition-all duration-200 ${
                   valid
                     ? 'cursor-pointer hover:brightness-110'
                     : invalid
@@ -211,7 +213,7 @@ export default function PlayerBoard({
                   return (
                     <div
                       key={i}
-                      className={`w-8 h-8 rounded transition-all duration-200 ${
+                      className={`w-6 h-6 sm:w-8 sm:h-8 rounded transition-all duration-200 ${
                         filled
                           ? ''
                           : valid
@@ -229,11 +231,11 @@ export default function PlayerBoard({
             );
           })}
 
-          <MosaicBorderLine />
+          <div className="hidden sm:block"><MosaicBorderLine /></div>
         </div>
 
-        {/* Arrow separator */}
-        <div className="flex flex-col justify-center self-stretch text-night-400 px-1">
+        {/* Arrow separator — hidden on mobile */}
+        <div className="hidden sm:flex flex-col justify-center self-stretch text-night-400 px-1">
           <svg viewBox="0 0 16 160" className="w-3 h-full" aria-hidden="true">
             {[0, 1, 2, 3, 4].map(i => (
               <g key={i} transform={`translate(8, ${16 + i * 32})`}>
@@ -245,15 +247,15 @@ export default function PlayerBoard({
         </div>
 
         {/* Wall (right) */}
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-0.5 sm:gap-1">
           {WALL_PATTERN.map((row, rowIndex) => (
-            <div key={rowIndex} className="flex gap-1">
+            <div key={rowIndex} className="flex gap-0.5 sm:gap-1">
               {row.map((color, colIndex) => {
                 const placed = board.wall[rowIndex][colIndex];
                 return (
                   <div
                     key={colIndex}
-                    className={`relative w-8 h-8 rounded transition-all duration-200 ${
+                    className={`relative w-6 h-6 sm:w-8 sm:h-8 rounded transition-all duration-200 ${
                       placed ? 'shadow-md' : ''
                     }`}
                     style={placed ? tileStyle(placed) : ghostTileStyle(color)}
@@ -268,10 +270,10 @@ export default function PlayerBoard({
       </div>
 
       {/* Floor line */}
-      <div className="mt-3 flex items-center gap-2">
+      <div className="mt-2 sm:mt-3 flex items-center gap-1.5 sm:gap-2">
         <button
           onClick={() => hasSelection && onFloorLineClick?.()}
-          className={`flex gap-1 items-center px-2 py-1.5 rounded-lg transition-all duration-200 ${
+          className={`flex gap-0.5 sm:gap-1 items-center px-1.5 sm:px-2 py-1 sm:py-1.5 rounded-lg transition-all duration-200 ${
             hasSelection && onFloorLineClick
               ? 'cursor-pointer bg-turquoise/5 hover:bg-turquoise/10'
               : ''
@@ -282,7 +284,7 @@ export default function PlayerBoard({
           {/* First-player token */}
           {board.hasFirstPlayerTokenPenalty && (
             <div
-              className="w-6 h-6 rounded-full bg-gold/20 border-2 border-gold flex items-center justify-center text-[9px] font-bold text-gold flex-shrink-0"
+              className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gold/20 border-2 border-gold flex items-center justify-center text-[8px] sm:text-[9px] font-bold text-gold flex-shrink-0"
               title={t('firstPlayer')}
             >
               1
@@ -293,7 +295,7 @@ export default function PlayerBoard({
             return (
               <div
                 key={i}
-                className={`w-6 h-6 rounded text-[9px] font-medium flex items-center justify-center transition-all duration-200 ${
+                className={`w-5 h-5 sm:w-6 sm:h-6 rounded text-[8px] sm:text-[9px] font-medium flex items-center justify-center transition-all duration-200 ${
                   tile ? '' : 'border border-dashed border-night-400/50 text-night-300/50'
                 }`}
                 style={tile ? {
@@ -309,7 +311,7 @@ export default function PlayerBoard({
 
         {/* Penalty sum badge */}
         {floorCount > 0 && (
-          <span className="text-xs font-medium text-red-400/80 bg-red-400/10 px-2 py-0.5 rounded-full">
+          <span className="text-[10px] sm:text-xs font-medium text-red-400/80 bg-red-400/10 px-1.5 sm:px-2 py-0.5 rounded-full">
             {totalPenalty}
           </span>
         )}
