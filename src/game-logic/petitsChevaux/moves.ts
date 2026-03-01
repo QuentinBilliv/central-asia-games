@@ -1,6 +1,6 @@
 import { PetitsChevauxGameState, PetitsChevauxMove, Horse } from '../types';
 import { calculateNewPosition, findCapturedHorse } from './board';
-import { EXIT_STABLE_VALUE, HORSES_PER_PLAYER } from './constants';
+import { EXIT_STABLE_VALUE, HORSES_PER_PLAYER, HOME_STRETCH_LENGTH } from './constants';
 
 interface MoveResult {
   valid: boolean;
@@ -35,7 +35,13 @@ function handleRoll(state: PetitsChevauxGameState): MoveResult {
   }
 
   const diceValue = Math.floor(Math.random() * 6) + 1;
-  const newState = { ...state, diceValue, mustRoll: false };
+  const rollingPlayerId = state.turnOrder[state.currentPlayerIndex];
+  const newState = {
+    ...state,
+    diceValue,
+    mustRoll: false,
+    lastRolls: { ...state.lastRolls, [rollingPlayerId]: diceValue },
+  };
 
   // Check if player has any valid moves
   const playerState = newState.players.find(
@@ -43,7 +49,6 @@ function handleRoll(state: PetitsChevauxGameState): MoveResult {
   )!;
 
   const hasValidMove = playerState.horses.some((horse) => {
-    if (horse.status === 'home') return false;
     if (horse.status === 'stable') return diceValue === EXIT_STABLE_VALUE;
     return calculateNewPosition(horse, diceValue) !== null;
   });
@@ -111,10 +116,10 @@ function handleMoveHorse(
     }
   }
 
-  // Update horses home count
+  // Update horses home count (only horses at the final home position count)
   if (newPos.status === 'home') {
     newPlayerState.horsesHome = newPlayerState.horses.filter(
-      (h) => h.status === 'home'
+      (h) => h.status === 'home' && h.homePosition === HOME_STRETCH_LENGTH - 1
     ).length;
 
     // Check win condition
@@ -160,7 +165,6 @@ export function getValidMoves(
 
   return playerState.horses
     .filter((horse) => {
-      if (horse.status === 'home') return false;
       if (horse.status === 'stable') return state.diceValue === EXIT_STABLE_VALUE;
       return calculateNewPosition(horse, state.diceValue!) !== null;
     })

@@ -17,3 +17,93 @@
     text-wrap: balance;
   }
 }
+
+@keyframes dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Azul Animations ─── */
+
+@keyframes azul-turn-glow {
+  0%, 100% { box-shadow: 0 0 8px 2px rgba(13, 148, 136, 0.15), inset 0 0 0 2px #0d9488; }
+  50% { box-shadow: 0 0 24px 6px rgba(13, 148, 136, 0.35), inset 0 0 0 2px #0d9488; }
+}
+
+@keyframes azul-valid-pulse {
+  0%, 100% { box-shadow: inset 0 0 0 1px rgba(13, 148, 136, 0.3); }
+  50% { box-shadow: inset 0 0 0 2px rgba(13, 148, 136, 0.6); }
+}
+
+@keyframes azul-score-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+@keyframes azul-tile-place {
+  0% { transform: scale(0.6); opacity: 0.4; }
+  60% { transform: scale(1.08); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes azul-factory-hover {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+/* ─── Petits Chevaux Animations ─── */
+
+@keyframes pc-dice-spin {
+  0% { transform: rotate(0deg) scale(1); }
+  20% { transform: rotate(72deg) scale(0.85); }
+  40% { transform: rotate(144deg) scale(1.1); }
+  60% { transform: rotate(216deg) scale(0.9); }
+  80% { transform: rotate(288deg) scale(1.05); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes pc-dice-reveal {
+  0% { transform: scale(0.6); opacity: 0.4; }
+  50% { transform: scale(1.18); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pc-victory-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes pc-victory-text {
+  0% { opacity: 0; transform: translateY(30px) scale(0.8); }
+  60% { transform: translateY(-4px) scale(1.02); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes pc-confetti {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(500px) rotate(720deg); opacity: 0; }
+}
+
+@keyframes pc-turn-glow {
+  0%, 100% { box-shadow: 0 0 8px 2px rgba(13, 148, 136, 0.2); }
+  50% { box-shadow: 0 0 20px 6px rgba(13, 148, 136, 0.45); }
+}
+
+@keyframes pc-score-active {
+  0%, 100% { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1); }
+  50% { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.3); }
+}
+
+@keyframes pc-extra-turn-pop {
+  0% { transform: scale(0.5); opacity: 0; }
+  60% { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}

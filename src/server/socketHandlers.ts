@@ -181,9 +181,12 @@ export function setupSocketHandlers(io: SocketIOServer, roomManager: RoomManager
 
       io.to(roomId).emit(SERVER_EVENTS.GAME_STATE_UPDATE, result.state);
 
-      if (result.state.winner) {
+      const isOver = result.state.winner || ('gameOver' in result.state && result.state.gameOver);
+      if (isOver) {
         roomManager.setStatus(roomId, 'finished');
-        const winnerPlayer = room.players.find((p) => p.id === result.state.winner);
+        const winnerPlayer = result.state.winner
+          ? room.players.find((p) => p.id === result.state.winner)
+          : null;
         io.to(roomId).emit(SERVER_EVENTS.GAME_OVER, {
           winner: winnerPlayer,
           gameState: result.state,

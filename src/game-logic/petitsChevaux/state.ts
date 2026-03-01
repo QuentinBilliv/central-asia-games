@@ -28,5 +28,6 @@ export function createInitialState(players: Player[]): PetitsChevauxGameState {
     extraTurn: false,
     turnOrder: players.map((p) => p.id),
     winner: null,
+    lastRolls: {},
   };
 }

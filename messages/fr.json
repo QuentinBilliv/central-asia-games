@@ -1,6 +1,7 @@
 {
   "common": {
     "appName": "Jeux d'Asie Centrale",
+    "changeLanguage": "Changer de langue",
     "loading": "Chargement...",
     "error": "Erreur",
     "close": "Fermer",
@@ -19,6 +20,10 @@
     "title": "Jeux d'Asie Centrale",
     "subtitle": "Jouez avec vos amis, sans inscription",
     "createGame": "Créer une partie",
+    "chooseMode": "Comment voulez-vous jouer ?",
+    "playOnline": "Jouer en ligne",
+    "playLocally": "Jouer en local",
+    "play": "Jouer",
     "azul": {
       "title": "Azul",
       "description": "Décorez les murs du palais avec des carreaux inspirés des mosaïques de Samarcande",
@@ -84,6 +89,21 @@
     "stable": "Écurie",
     "finish": "Arrivée",
     "horsesHome": "{count} chevaux à l'arrivée"
+  },
+  "local": {
+    "title": "Partie locale",
+    "subtitle": "Jouez sur le même appareil",
+    "setupTitle": "Configuration des joueurs",
+    "addPlayer": "Ajouter un joueur",
+    "removePlayer": "Retirer",
+    "human": "Humain",
+    "bot": "Bot",
+    "startGame": "Lancer la partie",
+    "passDevice": "Passe l'appareil à {name}",
+    "imReady": "Je suis prêt !",
+    "backToSetup": "Retour à la configuration",
+    "namePlaceholder": "Votre pseudo...",
+    "selectGame": "Choisissez un jeu"
   },
   "language": {
     "fr": "Français",

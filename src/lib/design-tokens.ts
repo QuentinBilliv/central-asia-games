@@ -8,12 +8,13 @@ export const colors = {
 } as const;
 
 // Azul tile colors mapped to Central Asian theme
+// Each tile has a base color, a lighter glaze highlight, and a darker shadow
 export const tileColors = {
-  lapis: { bg: '#1e40af', text: '#ffffff', name: 'Lapis' },
-  gold: { bg: '#d4a017', text: '#ffffff', name: 'Or' },
-  terracotta: { bg: '#c2410c', text: '#ffffff', name: 'Terre cuite' },
-  obsidian: { bg: '#374151', text: '#ffffff', name: 'Obsidienne' },
-  turquoise: { bg: '#0d9488', text: '#ffffff', name: 'Turquoise' },
+  lapis: { bg: '#1e40af', light: '#3b6ef5', dark: '#152e7a', text: '#ffffff', name: 'Lapis' },
+  gold: { bg: '#d4a017', light: '#f0c040', dark: '#9a7510', text: '#ffffff', name: 'Or' },
+  terracotta: { bg: '#c2410c', light: '#e8632e', dark: '#8a2e08', text: '#ffffff', name: 'Terre cuite' },
+  obsidian: { bg: '#4b5563', light: '#6b7280', dark: '#1f2937', text: '#ffffff', name: 'Obsidienne' },
+  turquoise: { bg: '#0d9488', light: '#2dd4bf', dark: '#065f56', text: '#ffffff', name: 'Turquoise' },
 } as const;
 
 // Petits Chevaux player colors

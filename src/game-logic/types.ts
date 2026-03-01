@@ -45,6 +45,7 @@ export interface AzulPlayerBoard {
   patternLines: AzulPatternLine[]; // 5 rows
   wall: AzulWall; // 5x5
   floorLine: AzulTileColor[]; // penalty tiles
+  hasFirstPlayerTokenPenalty: boolean; // took first-player token this round
   score: number;
 }
 
@@ -62,6 +63,7 @@ export interface AzulGameState {
   phase: 'picking' | 'wallTiling'; // picking tiles or wall tiling phase
   turnOrder: string[]; // player IDs in turn order
   winner: string | null;
+  gameOver: boolean;
 }
 
 export interface AzulMove {
@@ -100,6 +102,7 @@ export interface PetitsChevauxGameState {
   extraTurn: boolean; // true if player rolled 6
   turnOrder: string[]; // player IDs in turn order
   winner: string | null;
+  lastRolls: Record<string, number>; // playerId → last dice value rolled
 }
 
 export interface PetitsChevauxMove {

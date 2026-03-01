@@ -26,6 +26,7 @@ function createPlayerBoard(playerId: string): AzulPlayerBoard {
     })),
     wall: Array.from({ length: 5 }, () => Array(5).fill(null)),
     floorLine: [],
+    hasFirstPlayerTokenPenalty: false,
     score: 0,
   };
 }
@@ -61,5 +62,6 @@ export function createInitialState(players: Player[]): AzulGameState {
     phase: 'picking',
     turnOrder: players.map((p) => p.id),
     winner: null,
+    gameOver: false,
   };
 }

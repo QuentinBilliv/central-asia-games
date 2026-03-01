@@ -68,8 +68,7 @@ export function validateAndApplyMove(
     if (newState.hasFirstPlayerToken) {
       newState.hasFirstPlayerToken = false;
       newState.firstPlayerNextRound = playerId;
-      // Add a penalty tile to floor line (represented as taking the token)
-      board.floorLine.push('lapis' as AzulTileColor); // Use as marker
+      board.hasFirstPlayerTokenPenalty = true;
     }
   } else {
     return { valid: false, state, error: 'Invalid source' };
@@ -148,13 +147,15 @@ function performWallTiling(state: AzulGameState): AzulGameState {
       }
     }
 
-    // Apply floor line penalty
-    const penalty = calculateFloorPenalty(board.floorLine.length);
+    // Apply floor line penalty (token counts as +1 tile on floor)
+    const floorCount = board.floorLine.length + (board.hasFirstPlayerTokenPenalty ? 1 : 0);
+    const penalty = calculateFloorPenalty(floorCount);
     board.score = Math.max(0, board.score + penalty);
 
-    // Discard floor tiles
-    newState.discard.push(...board.floorLine.filter(t => t !== undefined));
+    // Discard floor tiles (only real tiles, not the token)
+    newState.discard.push(...board.floorLine);
     board.floorLine = [];
+    board.hasFirstPlayerTokenPenalty = false;
   }
 
   // Check game end
@@ -164,16 +165,20 @@ function performWallTiling(state: AzulGameState): AzulGameState {
       board.score += calculateEndGameBonuses(board.wall);
     }
 
-    // Determine winner
-    let maxScore = -1;
-    let winnerId: string | null = null;
-    for (const board of newState.playerBoards) {
-      if (board.score > maxScore) {
-        maxScore = board.score;
-        winnerId = board.playerId;
-      }
-    }
-    newState.winner = winnerId;
+    // Determine winner (tie-break: most complete horizontal rows)
+    const sorted = [...newState.playerBoards].sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      const aRows = a.wall.filter(row => row.every(t => t !== null)).length;
+      const bRows = b.wall.filter(row => row.every(t => t !== null)).length;
+      return bRows - aRows;
+    });
+    // If top players are still tied on both score and rows, it's a shared victory
+    const top = sorted[0];
+    const topRows = top.wall.filter(row => row.every(t => t !== null)).length;
+    const runners = sorted.filter(b => b.score === top.score &&
+      b.wall.filter(row => row.every(t => t !== null)).length === topRows);
+    newState.winner = runners.length === 1 ? top.playerId : null;
+    newState.gameOver = true;
     return newState;
   }
 

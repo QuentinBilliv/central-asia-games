@@ -33,7 +33,19 @@ export function calculateNewPosition(
 ): { status: 'board'; boardPosition: number; homePosition: number } |
    { status: 'home'; boardPosition: number; homePosition: number } |
    null {
-  if (horse.status === 'home') return null;
+  // Horse already at final home position — finished, can't move
+  if (horse.status === 'home' && horse.homePosition >= HOME_STRETCH_LENGTH - 1) return null;
+
+  // Horse in home stretch but not at final position — advance within home stretch
+  if (horse.status === 'home') {
+    const newHomePos = horse.homePosition + steps;
+    if (newHomePos > HOME_STRETCH_LENGTH - 1) return null; // overshoot
+    return {
+      status: 'home',
+      boardPosition: -1,
+      homePosition: newHomePos,
+    };
+  }
 
   if (horse.status === 'stable') {
     // Can only leave stable with a 6

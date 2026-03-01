@@ -1,6 +1,7 @@
 {
   "common": {
     "appName": "Central Asia Games",
+    "changeLanguage": "Change language",
     "loading": "Loading...",
     "error": "Error",
     "close": "Close",
@@ -19,6 +20,10 @@
     "title": "Central Asia Games",
     "subtitle": "Play with your friends, no sign-up needed",
     "createGame": "Create a game",
+    "chooseMode": "How do you want to play?",
+    "playOnline": "Play online",
+    "playLocally": "Play locally",
+    "play": "Play",
     "azul": {
       "title": "Azul",
       "description": "Decorate palace walls with tiles inspired by the mosaics of Samarkand",
@@ -84,6 +89,21 @@
     "stable": "Stable",
     "finish": "Finish",
     "horsesHome": "{count} horses home"
+  },
+  "local": {
+    "title": "Local Game",
+    "subtitle": "Play on the same device",
+    "setupTitle": "Player Setup",
+    "addPlayer": "Add a player",
+    "removePlayer": "Remove",
+    "human": "Human",
+    "bot": "Bot",
+    "startGame": "Start game",
+    "passDevice": "Pass the device to {name}",
+    "imReady": "I'm ready!",
+    "backToSetup": "Back to setup",
+    "namePlaceholder": "Your name...",
+    "selectGame": "Choose a game"
   },
   "language": {
     "fr": "Français",

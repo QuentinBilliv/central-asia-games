@@ -30,14 +30,15 @@ export default function Modal({ open, onClose, title, children, className }: Mod
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-night/50 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-night/50 backdrop-blur-sm"
       onClick={(e) => {
         if (e.target === overlayRef.current) onClose();
       }}
     >
       <div
         className={cn(
-          'bg-white rounded-2xl shadow-2xl p-6 mx-4 max-w-md w-full max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-200',
+          'bg-white shadow-2xl p-5 sm:p-6 max-w-md w-full max-h-[85dvh] overflow-y-auto',
+          'rounded-t-2xl sm:rounded-2xl sm:mx-4 pb-[env(safe-area-inset-bottom,20px)]',
           className
         )}
       >
