@@ -8,6 +8,14 @@ import { RoomManager } from './src/server/rooms';
 const dev = process.env.NODE_ENV !== 'production';
 const port = parseInt(process.env.PORT || '3000', 10);
 
+const ALLOWED_ORIGINS: string[] = [
+  'http://localhost:3000',
+  'https://steppegames.vercel.app',
+];
+if (process.env.FRONTEND_URL) {
+  ALLOWED_ORIGINS.push(process.env.FRONTEND_URL);
+}
+
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
@@ -17,8 +25,9 @@ app.prepare().then(() => {
 
   const io = new SocketIOServer(httpServer, {
     cors: {
-      origin: dev ? 'http://localhost:3000' : undefined,
+      origin: ALLOWED_ORIGINS,
       methods: ['GET', 'POST'],
+      credentials: true,
     },
     pingTimeout: 30000,
     pingInterval: 10000,

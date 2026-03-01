@@ -2,14 +2,6 @@ import { NextResponse } from 'next/server';
 import { nanoid } from 'nanoid';
 import { GAME_TYPES } from '@/game-logic/types';
 
-// Note: The actual room creation happens via Socket.IO.
-// This API route creates the room ID and returns it.
-// The client then connects via Socket.IO to join.
-
-// We use a simple in-memory set to track created room IDs.
-// The actual room state is managed by the RoomManager in the Socket.IO server.
-const createdRooms = new Set<string>();
-
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -23,7 +15,6 @@ export async function POST(request: Request) {
     }
 
     const roomId = nanoid(8);
-    createdRooms.add(roomId);
 
     return NextResponse.json({ roomId, gameType });
   } catch {
