@@ -9,6 +9,7 @@ import {
 } from './types';
 import { getWallColumn } from './azul/scoring';
 import { getValidMoves } from './petitsChevaux/moves';
+import { secureRandomInt } from './random';
 
 /**
  * Pick a random valid Azul move for a bot player.
@@ -79,7 +80,7 @@ export function pickAzulBotMove(
 
   // Prefer pattern-line placements, fall back to floor
   const candidates = patternLineMoves.length > 0 ? patternLineMoves : floorMoves;
-  return candidates[Math.floor(Math.random() * candidates.length)];
+  return candidates[secureRandomInt(candidates.length)];
 }
 
 /**
@@ -100,7 +101,7 @@ export function pickPetitsChevauxBotMove(
     return { type: 'roll' };
   }
 
-  const horseId = validHorses[Math.floor(Math.random() * validHorses.length)];
+  const horseId = validHorses[secureRandomInt(validHorses.length)];
   return { type: 'moveHorse', horseId };
 }
 

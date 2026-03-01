@@ -7,7 +7,12 @@ import {
   GameMoveSchema,
 } from '../socket/events';
 import { gameHandlers } from './gameHandlers';
-import { Room } from '../game-logic/types';
+import { Room, BurkutBoriGameState, PetitsChevauxGameState, AzulGameState } from '../game-logic/types';
+import {
+  pickBurkutBoriBotMove,
+  pickPetitsChevauxBotMove,
+  pickAzulBotMove,
+} from '../game-logic/bot';
 
 // ─── Authenticated socket helpers ───
 
@@ -289,5 +294,79 @@ function handlePlayerLeave(
       players: room.players,
       hostId: room.hostId,
     });
+
+    // Auto-play for disconnected player if it's their turn
+    if (room.status === 'playing' && room.gameState) {
+      autoPlayForDisconnected(io, roomManager, roomId);
+    }
   }
+}
+
+/**
+ * When a disconnected player's turn comes up, auto-play a bot move on their
+ * behalf so the game isn't stuck. Loops to handle extra turns (e.g. rolling 6).
+ */
+function autoPlayForDisconnected(
+  io: SocketIOServer,
+  roomManager: RoomManager,
+  roomId: string
+) {
+  const MAX_AUTO_PLAYS = 10; // Safety limit to prevent infinite loops
+  let autoPlays = 0;
+
+  const tick = () => {
+    if (autoPlays >= MAX_AUTO_PLAYS) return;
+
+    const room = roomManager.get(roomId);
+    if (!room || !room.gameState || room.status !== 'playing') return;
+
+    const handler = gameHandlers[room.gameType];
+    if (handler.isGameOver(room.gameState)) return;
+
+    const currentPlayerId = room.gameState.turnOrder[room.gameState.currentPlayerIndex];
+    const currentPlayer = room.players.find((p) => p.id === currentPlayerId);
+
+    // Only auto-play if the current player is disconnected
+    if (!currentPlayer || currentPlayer.connected) return;
+
+    // Pick a bot move based on game type
+    let move: any = null;
+    if (room.gameType === 'burkutBori') {
+      move = pickBurkutBoriBotMove(room.gameState as BurkutBoriGameState, currentPlayerId);
+    } else if (room.gameType === 'petitsChevaux') {
+      move = pickPetitsChevauxBotMove(room.gameState as PetitsChevauxGameState, currentPlayerId);
+    } else if (room.gameType === 'azul') {
+      move = pickAzulBotMove(room.gameState as AzulGameState, currentPlayerId);
+    }
+
+    if (!move) return;
+
+    const result = handler.validateAndApplyMove(room.gameState, currentPlayerId, move);
+    if (!result.valid) return;
+
+    roomManager.setGameState(roomId, result.state);
+    io.to(roomId).emit(
+      SERVER_EVENTS.GAME_STATE_UPDATE,
+      handler.sanitizeState(result.state)
+    );
+
+    if (handler.isGameOver(result.state)) {
+      roomManager.setStatus(roomId, 'finished');
+      const winnerPlayer = result.state.winner
+        ? room.players.find((p) => p.id === result.state.winner)
+        : null;
+      io.to(roomId).emit(SERVER_EVENTS.GAME_OVER, {
+        winner: winnerPlayer,
+        gameState: handler.sanitizeState(result.state),
+      });
+      return;
+    }
+
+    autoPlays++;
+    // Delay next auto-play so clients can see the moves
+    setTimeout(tick, 1500);
+  };
+
+  // Start after a short delay to let the disconnect event propagate
+  setTimeout(tick, 2000);
 }

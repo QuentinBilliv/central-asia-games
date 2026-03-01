@@ -1,6 +1,7 @@
 import { BurkutBoriGameState, BurkutBoriMove, BurkutBoriLastMove } from '../types';
 import { BOARD_SIZE, EXTRA_TURN_VALUE } from './constants';
 import { resolveCell } from './board';
+import { secureDiceRoll } from '../random';
 
 interface MoveResult {
   valid: boolean;
@@ -23,10 +24,10 @@ export function validateAndApplyMove(
   }
 
   // Roll the die
-  const diceValue = Math.floor(Math.random() * 6) + 1;
+  const diceValue = secureDiceRoll();
 
   // Deep clone
-  const newState: BurkutBoriGameState = JSON.parse(JSON.stringify(state));
+  const newState: BurkutBoriGameState = structuredClone(state);
   const playerIdx = newState.players.findIndex((p) => p.playerId === playerId);
   const player = newState.players[playerIdx];
 

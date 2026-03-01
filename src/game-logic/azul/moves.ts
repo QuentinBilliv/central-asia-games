@@ -2,6 +2,7 @@ import { AzulGameState, AzulMove, AzulTileColor } from '../types';
 import { WALL_PATTERN, FACTORIES_BY_PLAYERS } from './constants';
 import { scoreTilePlacement, calculateFloorPenalty, calculateEndGameBonuses, isGameOver, getWallColumn } from './scoring';
 import { createFactories } from './state';
+import { secureRandomInt } from '../random';
 
 interface MoveResult {
   valid: boolean;
@@ -28,7 +29,7 @@ export function validateAndApplyMove(
   }
 
   // Deep clone
-  const newState: AzulGameState = JSON.parse(JSON.stringify(state));
+  const newState: AzulGameState = structuredClone(state);
 
   const board = newState.playerBoards.find((b) => b.playerId === playerId)!;
 
@@ -201,7 +202,7 @@ function performWallTiling(state: AzulGameState): AzulGameState {
     // Shuffle discard into bag
     const shuffled = [...newState.discard];
     for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
+      const j = secureRandomInt(i + 1);
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
     newState.bag = [...newState.bag, ...shuffled];

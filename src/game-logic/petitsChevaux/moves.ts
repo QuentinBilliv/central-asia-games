@@ -1,6 +1,7 @@
 import { PetitsChevauxGameState, PetitsChevauxMove, Horse } from '../types';
 import { calculateNewPosition, findCapturedHorse } from './board';
 import { EXIT_STABLE_VALUE, HORSES_PER_PLAYER, HOME_STRETCH_LENGTH } from './constants';
+import { secureDiceRoll } from '../random';
 
 interface MoveResult {
   valid: boolean;
@@ -34,7 +35,7 @@ function handleRoll(state: PetitsChevauxGameState): MoveResult {
     return { valid: false, state, error: 'Must select a horse to move' };
   }
 
-  const diceValue = Math.floor(Math.random() * 6) + 1;
+  const diceValue = secureDiceRoll();
   const rollingPlayerId = state.turnOrder[state.currentPlayerIndex];
   const newState = {
     ...state,
@@ -91,7 +92,7 @@ function handleMoveHorse(
   }
 
   // Deep clone state
-  const newState: PetitsChevauxGameState = JSON.parse(JSON.stringify(state));
+  const newState: PetitsChevauxGameState = structuredClone(state);
   const newPlayerState = newState.players[playerIndex];
   const newHorse = newPlayerState.horses.find((h) => h.id === horseId)!;
 

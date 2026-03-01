@@ -1,5 +1,6 @@
 import { Player, AzulGameState, AzulPlayerBoard, AzulTileColor, AzulFactory } from '../types';
 import { TILE_COLORS, TILES_PER_COLOR, TILES_PER_FACTORY, FACTORIES_BY_PLAYERS, PATTERN_LINE_SIZES } from './constants';
+import { secureRandomInt } from '../random';
 
 function createBag(): AzulTileColor[] {
   const bag: AzulTileColor[] = [];
@@ -10,7 +11,7 @@ function createBag(): AzulTileColor[] {
   }
   // Shuffle
   for (let i = bag.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = secureRandomInt(i + 1);
     [bag[i], bag[j]] = [bag[j], bag[i]];
   }
   return bag;
