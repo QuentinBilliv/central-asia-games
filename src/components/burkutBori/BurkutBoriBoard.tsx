@@ -89,6 +89,7 @@ export default function BurkutBoriBoard({ gameState, playerId, players, onMove, 
     localRollRef.current = false;
 
     if (wasLocalRoll) {
+      setRolling(false);
       stepTo(0);
     } else {
       setRolling(true);
@@ -163,7 +164,6 @@ export default function BurkutBoriBoard({ gameState, playerId, players, onMove, 
     setRolling(true);
     setTimeout(() => {
       onMove({ type: 'roll' });
-      setRolling(false);
     }, 400);
   };
 

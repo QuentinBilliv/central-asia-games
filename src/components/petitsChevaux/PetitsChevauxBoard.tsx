@@ -7,7 +7,7 @@ import { playerColors } from '@/lib/design-tokens';
 import { START_POSITIONS, BOARD_SIZE, HOME_STRETCH_LENGTH } from '@/game-logic/petitsChevaux/constants';
 import Button from '@/components/ui/Button';
 import DiceRoller from './DiceRoller';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { BOARD_CX, BOARD_CY, TRACK_RADIUS, getBoardPosition, getStablePosition, getHomePosition, STABLE_CORNERS } from './layout';
 import {
@@ -57,9 +57,15 @@ export default function PetitsChevauxBoard({
     setRolling(true);
     setTimeout(() => {
       onMove({ type: 'roll' });
-      setRolling(false);
     }, 600);
   };
+
+  // Stop rolling animation once server responds with the dice result
+  useEffect(() => {
+    if (rolling && !gameState.mustRoll) {
+      setRolling(false);
+    }
+  }, [gameState.mustRoll, rolling]);
 
   const handleHorseClick = (horseId: number) => {
     if (!isMyTurn || gameState.mustRoll) return;

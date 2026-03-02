@@ -4,7 +4,9 @@ import {
   CLIENT_EVENTS,
   SERVER_EVENTS,
   JoinRoomSchema,
+  StartGameSchema,
   GameMoveSchema,
+  MemoryGameConfigSchema,
 } from '../socket/events';
 import { gameHandlers } from './gameHandlers';
 import { Room } from '../game-logic/types';
@@ -142,7 +144,7 @@ export function setupSocketHandlers(io: SocketIOServer, roomManager: RoomManager
 
     // ─── START GAME ───
     // Uses socket-bound identity — only the real host can start
-    socket.on(CLIENT_EVENTS.START_GAME, () => {
+    socket.on(CLIENT_EVENTS.START_GAME, (data: unknown) => {
       const auth = getSocketIdentity(socket);
       if (!auth) {
         socket.emit(SERVER_EVENTS.ERROR, { message: 'Not in a room' });
@@ -165,8 +167,26 @@ export function setupSocketHandlers(io: SocketIOServer, roomManager: RoomManager
         return;
       }
 
+      // Parse optional gameConfig from payload (validated per game type)
+      const parsed = StartGameSchema.safeParse(data);
+      let gameConfig: any;
+      if (parsed.success && parsed.data.gameConfig != null) {
+        if (room.gameType === 'memory') {
+          const configParsed = MemoryGameConfigSchema.safeParse(parsed.data.gameConfig);
+          if (!configParsed.success) {
+            socket.emit(SERVER_EVENTS.ERROR, { message: 'Invalid game config' });
+            return;
+          }
+          gameConfig = configParsed.data;
+        }
+        // Other games: gameConfig silently ignored
+      }
+      if (gameConfig) {
+        room.gameConfig = gameConfig;
+      }
+
       const handler = gameHandlers[room.gameType];
-      const gameState = handler.createInitialState(room.players);
+      const gameState = handler.createInitialState(room.players, gameConfig);
 
       roomManager.setGameState(auth.roomId, gameState);
       roomManager.setStatus(auth.roomId, 'playing');
@@ -251,7 +271,7 @@ export function setupSocketHandlers(io: SocketIOServer, roomManager: RoomManager
       }
 
       const handler = gameHandlers[room.gameType];
-      const gameState = handler.createInitialState(room.players);
+      const gameState = handler.createInitialState(room.players, room.gameConfig);
 
       roomManager.setGameState(auth.roomId, gameState);
       roomManager.setStatus(auth.roomId, 'playing');

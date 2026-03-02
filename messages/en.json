@@ -38,6 +38,11 @@
       "title": "Eagles & Wolves",
       "description": "Golden eagles lift you up, grey wolves bring you down across 100 cells",
       "players": "2-4 players"
+    },
+    "memory": {
+      "title": "Memory",
+      "description": "Find matching pairs of Central Asian symbols hidden on the board",
+      "players": "2-4 players"
     }
   },
   "lobby": {
@@ -109,6 +114,23 @@
     "finish": "Finish",
     "offBoard": "Off board",
     "cell": "Cell {n}"
+  },
+  "memory": {
+    "yourTurn": "Your turn",
+    "opponentTurn": "{name}'s turn",
+    "flipFirst": "Flip a card",
+    "flipSecond": "Flip second card",
+    "match": "Match!",
+    "noMatch": "No match",
+    "winner": "{name} wins!",
+    "tie": "It's a tie!",
+    "pairs": "pairs",
+    "pairsFound": "Pairs found",
+    "totalCards": "Cards",
+    "totalPairs": "Pairs",
+    "rows": "Rows",
+    "columns": "Columns",
+    "gridSize": "Grid size"
   },
   "local": {
     "title": "Local Game",

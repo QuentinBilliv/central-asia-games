@@ -10,7 +10,9 @@ import Footer from '@/components/layout/Footer';
 import CentralAsianPattern from '@/components/layout/CentralAsianPattern';
 import Card from '@/components/ui/Card';
 import PlayerSetupForm, { PlayerConfig } from '@/components/local/PlayerSetupForm';
-import { GameType, GAME_TYPES } from '@/game-logic/types';
+import GridConfigSelector from '@/components/memory/GridConfigSelector';
+import { GameType, GAME_TYPES, MemoryGameConfig } from '@/game-logic/types';
+import { DEFAULT_ROWS, DEFAULT_COLS } from '@/game-logic/memory/constants';
 
 export default function LocalSetupPage() {
   const t = useTranslations();
@@ -20,6 +22,7 @@ export default function LocalSetupPage() {
   const [selectedGame, setSelectedGame] = useState<GameType | null>(
     gameParam && (GAME_TYPES as readonly string[]).includes(gameParam) ? (gameParam as GameType) : null
   );
+  const [memoryConfig, setMemoryConfig] = useState<MemoryGameConfig>({ rows: DEFAULT_ROWS, cols: DEFAULT_COLS });
 
   const handleStart = (playerConfigs: PlayerConfig[]) => {
     if (!selectedGame) return;
@@ -32,6 +35,11 @@ export default function LocalSetupPage() {
     }));
 
     sessionStorage.setItem('localGamePlayers', JSON.stringify(localPlayers));
+    if (selectedGame === 'memory') {
+      sessionStorage.setItem('localGameConfig', JSON.stringify(memoryConfig));
+    } else {
+      sessionStorage.removeItem('localGameConfig');
+    }
     router.push(`/local/${selectedGame}`);
   };
 
@@ -63,7 +71,7 @@ export default function LocalSetupPage() {
         </div>
 
         {/* Game selection */}
-        <div className="grid grid-cols-3 gap-3 sm:gap-4 max-w-xl w-full mb-6 sm:mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-2xl w-full mb-6 sm:mb-8">
           <Card
             variant="game"
             className={`cursor-pointer text-center p-3 sm:p-4 transition-all ${
@@ -136,7 +144,44 @@ export default function LocalSetupPage() {
               {t('home.burkutBori.title')}
             </h3>
           </Card>
+
+          <Card
+            variant="game"
+            className={`cursor-pointer text-center p-3 sm:p-4 transition-all ${
+              selectedGame === 'memory'
+                ? 'ring-2 ring-turquoise border-turquoise'
+                : ''
+            }`}
+            onClick={() => setSelectedGame('memory')}
+          >
+            <div className="h-14 sm:h-16 bg-gradient-to-br from-turquoise to-gold rounded-lg mb-2 sm:mb-3 flex items-center justify-center">
+              <div className="grid grid-cols-4 gap-0.5">
+                {['🏔️', '?', '🐎', '?', '?', '🦅', '?', '🏔️', '🐎', '?', '?', '🦅', '?', '?', '?', '?'].map(
+                  (sym, i) => (
+                    <div
+                      key={i}
+                      className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-sm flex items-center justify-center text-[6px] sm:text-[7px] ${
+                        sym === '?' ? 'bg-lapis/60' : 'bg-white/80'
+                      }`}
+                    >
+                      {sym !== '?' && sym}
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
+            <h3 className="font-serif font-bold text-night text-sm sm:text-base">
+              {t('home.memory.title')}
+            </h3>
+          </Card>
         </div>
+
+        {/* Memory grid config */}
+        {selectedGame === 'memory' && (
+          <div className="max-w-md w-full mb-6">
+            <GridConfigSelector value={memoryConfig} onChange={setMemoryConfig} />
+          </div>
+        )}
 
         {/* Player setup */}
         {selectedGame && <PlayerSetupForm onStart={handleStart} />}

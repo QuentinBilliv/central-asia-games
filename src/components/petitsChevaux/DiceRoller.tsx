@@ -31,7 +31,9 @@ export default function DiceRoller({ value, rolling, canRoll, onRoll }: DiceRoll
       prevValueRef.current = value;
       return () => clearTimeout(timer);
     }
-    prevValueRef.current = value;
+    if (!rolling) {
+      prevValueRef.current = value;
+    }
   }, [value, rolling]);
 
   const animClass = rolling

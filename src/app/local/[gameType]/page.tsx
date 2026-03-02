@@ -17,10 +17,11 @@ export default function LocalGamePage() {
   const { Board } = clientGameRegistry[gameType];
 
   const [localPlayers, setLocalPlayers] = useState<LocalPlayer[] | null>(null);
+  const [gameConfig, setGameConfig] = useState<any>(undefined);
   const [showTransition, setShowTransition] = useState(false);
   const hasStarted = useRef(false);
 
-  // Read players from sessionStorage
+  // Read players and config from sessionStorage
   useEffect(() => {
     const stored = sessionStorage.getItem('localGamePlayers');
     if (!stored) {
@@ -33,6 +34,13 @@ export default function LocalGamePage() {
     } catch {
       router.replace('/local');
     }
+
+    const storedConfig = sessionStorage.getItem('localGameConfig');
+    if (storedConfig) {
+      try {
+        setGameConfig(JSON.parse(storedConfig));
+      } catch { /* ignore */ }
+    }
   }, [router]);
 
   const {
@@ -43,7 +51,7 @@ export default function LocalGamePage() {
     sendMove,
     restartGame,
     startGame,
-  } = useLocalGame(gameType, localPlayers || []);
+  } = useLocalGame(gameType, localPlayers || [], gameConfig);
 
   // Auto-start game once players are loaded
   useEffect(() => {

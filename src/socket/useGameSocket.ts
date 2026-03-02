@@ -56,9 +56,9 @@ export function useGameSocket(roomId: string) {
     socket.emit(CLIENT_EVENTS.LEAVE_ROOM, { roomId, playerId });
   }, [socket, roomId, playerId]);
 
-  const startGame = useCallback(() => {
+  const startGame = useCallback((gameConfig?: any) => {
     if (!socket) return;
-    socket.emit(CLIENT_EVENTS.START_GAME, { roomId, playerId });
+    socket.emit(CLIENT_EVENTS.START_GAME, { roomId, playerId, gameConfig });
   }, [socket, roomId, playerId]);
 
   const sendMove = useCallback(

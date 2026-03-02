@@ -10,11 +10,13 @@ import PlayerList from '@/components/lobby/PlayerList';
 import InviteLink from '@/components/lobby/InviteLink';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
+import GridConfigSelector from '@/components/memory/GridConfigSelector';
 import { useGameSocket } from '@/socket/useGameSocket';
 import { useLobbyStore } from '@/store/useLobbyStore';
 import { SERVER_EVENTS } from '@/socket/events';
 import { getSocket } from '@/socket/client';
-import { GameType } from '@/game-logic/types';
+import { GameType, MemoryGameConfig } from '@/game-logic/types';
+import { DEFAULT_ROWS, DEFAULT_COLS } from '@/game-logic/memory/constants';
 import { clientGameRegistry } from '@/client/gameRegistry';
 
 export default function RoomPage() {
@@ -29,6 +31,7 @@ export default function RoomPage() {
 
   const { players, hostId, status, gameType, joined, error } = useLobbyStore();
   const [gameState, setGameState] = useState<any>(null);
+  const [memoryConfig, setMemoryConfig] = useState<MemoryGameConfig>({ rows: DEFAULT_ROWS, cols: DEFAULT_COLS });
 
   // Effective game type: from lobby state or URL
   const effectiveGameType = gameType || gameTypeFromUrl;
@@ -120,8 +123,18 @@ export default function RoomPage() {
                 <p className="text-sm text-terracotta text-center">{error}</p>
               )}
 
+              {effectiveGameType === 'memory' && isHost && (
+                <GridConfigSelector value={memoryConfig} onChange={setMemoryConfig} />
+              )}
+
               {canStart ? (
-                <Button className="w-full" size="lg" onClick={startGame}>
+                <Button
+                  className="w-full"
+                  size="lg"
+                  onClick={() =>
+                    startGame(effectiveGameType === 'memory' ? memoryConfig : undefined)
+                  }
+                >
                   {t('lobby.startGame')}
                 </Button>
               ) : isHost ? (

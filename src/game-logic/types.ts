@@ -1,6 +1,6 @@
 // Shared types for all games
 
-export const GAME_TYPES = ['azul', 'petitsChevaux', 'burkutBori'] as const;
+export const GAME_TYPES = ['azul', 'petitsChevaux', 'burkutBori', 'memory'] as const;
 export type GameType = (typeof GAME_TYPES)[number];
 export type GameStatus = 'waiting' | 'playing' | 'finished';
 
@@ -17,7 +17,8 @@ export interface Room {
   players: Player[];
   hostId: string;
   status: GameStatus;
-  gameState: AzulGameState | PetitsChevauxGameState | BurkutBoriGameState | null;
+  gameState: AzulGameState | PetitsChevauxGameState | BurkutBoriGameState | MemoryGameState | null;
+  gameConfig?: MemoryGameConfig;
   createdAt: number;
   lastActivity: number;
   maxPlayers: number;
@@ -140,4 +141,43 @@ export interface BurkutBoriGameState {
 
 export interface BurkutBoriMove {
   type: 'roll';
+}
+
+// ===== Memory Types =====
+
+export interface MemoryGameConfig {
+  rows: number;
+  cols: number;
+}
+
+export interface MemoryCard {
+  index: number;
+  pairId: number;
+  symbol: string;
+  flipped: boolean;
+  matched: boolean;
+}
+
+export interface MemoryPlayerState {
+  playerId: string;
+  pairsFound: number;
+}
+
+export interface MemoryGameState {
+  type: 'memory';
+  cards: MemoryCard[];
+  rows: number;
+  cols: number;
+  players: MemoryPlayerState[];
+  currentPlayerIndex: number;
+  turnOrder: string[];
+  firstFlippedIndex: number | null;
+  pendingReset: [number, number] | null;
+  winner: string | null;
+  gameOver: boolean;
+}
+
+export interface MemoryMove {
+  type: 'flip';
+  cardIndex: number;
 }

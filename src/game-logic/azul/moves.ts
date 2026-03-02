@@ -86,6 +86,9 @@ export function validateAndApplyMove(
 
     // Validate: corresponding wall position must not be filled
     const wallCol = getWallColumn(move.patternLineIndex, move.color);
+    if (wallCol < 0 || wallCol >= 5) {
+      return { valid: false, state, error: 'Invalid wall column' };
+    }
     if (board.wall[move.patternLineIndex][wallCol] !== null) {
       return { valid: false, state, error: 'Wall position already filled' };
     }
@@ -132,6 +135,7 @@ function performWallTiling(state: AzulGameState): AzulGameState {
       if (line.count === line.maxCount && line.color !== null) {
         // Place one tile on the wall
         const col = getWallColumn(row, line.color);
+        if (col < 0 || col >= 5) continue;
         board.wall[row][col] = line.color;
 
         // Score the placement

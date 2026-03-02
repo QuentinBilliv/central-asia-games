@@ -20,6 +20,18 @@ export const PetitsChevauxMoveSchema = z.discriminatedUnion('type', [
 
 export const BurkutBoriMoveSchema = z.object({ type: z.literal('roll') });
 
+export const MemoryMoveSchema = z.object({
+  type: z.literal('flip'),
+  cardIndex: z.number().int().min(0).max(63), // max grid 8x8 = 64 cards
+});
+
+export const MemoryGameConfigSchema = z.object({
+  rows: z.number().int().min(4).max(8),
+  cols: z.number().int().min(4).max(8),
+}).refine((c) => (c.rows * c.cols) % 2 === 0, {
+  message: 'Total cards must be even',
+});
+
 // Client -> Server events
 export const JoinRoomSchema = z.object({
   roomId: z.string().min(1).max(20),
@@ -36,6 +48,7 @@ export const LeaveRoomSchema = z.object({
 export const StartGameSchema = z.object({
   roomId: z.string().min(1).max(20),
   playerId: z.string().min(1).max(50),
+  gameConfig: z.any().optional(),
 });
 
 export const GameMoveSchema = z.object({

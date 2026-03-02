@@ -11,7 +11,7 @@ export interface LocalPlayer {
   index: number;
 }
 
-export function useLocalGame(gameType: GameType, localPlayers: LocalPlayer[]) {
+export function useLocalGame(gameType: GameType, localPlayers: LocalPlayer[], gameConfig?: any) {
   const [gameState, setGameState] = useState<any>(null);
   const [previousPlayerId, setPreviousPlayerId] = useState<string | null>(null);
   const botTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -30,10 +30,10 @@ export function useLocalGame(gameType: GameType, localPlayers: LocalPlayer[]) {
     : null;
 
   const startGame = useCallback(() => {
-    setGameState(handler.createInitialState(players));
+    setGameState(handler.createInitialState(players, gameConfig));
     setPreviousPlayerId(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [gameType, JSON.stringify(localPlayers)]);
+  }, [gameType, JSON.stringify(localPlayers), JSON.stringify(gameConfig)]);
 
   const sendMove = useCallback(
     (move: any) => {

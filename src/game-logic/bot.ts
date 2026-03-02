@@ -6,6 +6,8 @@ import {
   PetitsChevauxMove,
   BurkutBoriGameState,
   BurkutBoriMove,
+  MemoryGameState,
+  MemoryMove,
 } from './types';
 import { getWallColumn } from './azul/scoring';
 import { getValidMoves } from './petitsChevaux/moves';
@@ -56,6 +58,7 @@ export function pickAzulBotMove(
         if (line.count >= line.maxCount) continue;
         // Wall position must not already be filled
         const wallCol = getWallColumn(lineIdx, color);
+        if (wallCol < 0 || wallCol >= 5) continue;
         if (board.wall[lineIdx][wallCol] !== null) continue;
 
         patternLineMoves.push({
@@ -114,4 +117,19 @@ export function pickBurkutBoriBotMove(
   _playerId: string
 ): BurkutBoriMove {
   return { type: 'roll' };
+}
+
+/**
+ * Pick a move for a Memory bot.
+ * "Fair" bot: picks a random non-matched, non-flipped card.
+ */
+export function pickMemoryBotMove(
+  state: MemoryGameState,
+  _playerId: string
+): MemoryMove | null {
+  const available = state.cards.filter((c) => !c.matched && !c.flipped);
+  if (available.length === 0) return null;
+
+  const card = available[secureRandomInt(available.length)];
+  return { type: 'flip', cardIndex: card.index };
 }

@@ -31,6 +31,10 @@ function isLineValid(
   if (line.count >= line.maxCount) return false;
   // Wall position already filled
   const wallCol = getWallColumn(rowIndex, color);
+  if (wallCol < 0 || wallCol >= 5) {
+    console.warn(`[Azul] getWallColumn returned ${wallCol} for row=${rowIndex} color=${color}`);
+    return false;
+  }
   if (board.wall[rowIndex][wallCol] !== null) return false;
   return true;
 }

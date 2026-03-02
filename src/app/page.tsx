@@ -50,7 +50,7 @@ export default function HomePage() {
         </div>
 
         {/* Game Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-5xl w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-6xl w-full">
           {/* Azul Card */}
           <Card variant="game" className="group" onClick={() => setSelectedGame('azul')}>
             <div className="relative h-36 sm:h-48 bg-gradient-to-br from-lapis to-turquoise overflow-hidden">
@@ -160,6 +160,52 @@ export default function HomePage() {
                   {t('home.burkutBori.players')}
                 </span>
                 <span className="text-sm font-medium text-[#7c3aed]">
+                  {t('home.play')}
+                </span>
+              </div>
+            </div>
+          </Card>
+
+          {/* Memory Card */}
+          <Card variant="game" className="group" onClick={() => setSelectedGame('memory')}>
+            <div className="relative h-36 sm:h-48 bg-gradient-to-br from-turquoise to-gold overflow-hidden">
+              <CentralAsianPattern variant="ikat" className="opacity-15" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
+                  {['🏔️', '🐎', '?', '🦅', '?', '🐫', '🐎', '?', '🏔️', '?', '🐫', '🦅', '?', '?', '?', '?'].map(
+                    (sym, i) => (
+                      <div
+                        key={i}
+                        className={`w-6 h-6 sm:w-8 sm:h-8 rounded-md shadow-md flex items-center justify-center text-xs sm:text-sm transform transition-transform group-hover:scale-110 duration-300 ${
+                          sym === '?'
+                            ? 'bg-gradient-to-br from-lapis to-turquoise'
+                            : 'bg-white/90'
+                        }`}
+                        style={{ transitionDelay: `${i * 30}ms` }}
+                      >
+                        {sym === '?' ? (
+                          <div className="w-3 h-3 sm:w-4 sm:h-4 border border-white/40 rounded-sm rotate-45" />
+                        ) : (
+                          sym
+                        )}
+                      </div>
+                    )
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="p-4 sm:p-5">
+              <h2 className="font-serif text-lg sm:text-xl font-bold text-night mb-1.5 sm:mb-2">
+                {t('home.memory.title')}
+              </h2>
+              <p className="text-xs sm:text-sm text-night-400 mb-2 sm:mb-3">
+                {t('home.memory.description')}
+              </p>
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-turquoise font-medium bg-turquoise-50 px-2 py-1 rounded">
+                  {t('home.memory.players')}
+                </span>
+                <span className="text-sm font-medium text-turquoise">
                   {t('home.play')}
                 </span>
               </div>

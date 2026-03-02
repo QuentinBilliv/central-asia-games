@@ -3,13 +3,16 @@ import { GameType, Player } from '@/game-logic/types';
 import AzulBoard from '@/components/azul/AzulBoard';
 import PetitsChevauxBoard from '@/components/petitsChevaux/PetitsChevauxBoard';
 import BurkutBoriBoard from '@/components/burkutBori/BurkutBoriBoard';
+import MemoryBoard from '@/components/memory/MemoryBoard';
 import { createInitialState as createAzulState } from '@/game-logic/azul/state';
 import { validateAndApplyMove as azulApplyMove } from '@/game-logic/azul/moves';
 import { createInitialState as createPCState } from '@/game-logic/petitsChevaux/state';
 import { validateAndApplyMove as pcApplyMove } from '@/game-logic/petitsChevaux/moves';
 import { createInitialState as createBBState } from '@/game-logic/burkutBori/state';
 import { validateAndApplyMove as bbApplyMove } from '@/game-logic/burkutBori/moves';
-import { pickAzulBotMove, pickPetitsChevauxBotMove, pickBurkutBoriBotMove } from '@/game-logic/bot';
+import { createInitialState as createMemoryState } from '@/game-logic/memory/state';
+import { validateAndApplyMove as memoryApplyMove } from '@/game-logic/memory/moves';
+import { pickAzulBotMove, pickPetitsChevauxBotMove, pickBurkutBoriBotMove, pickMemoryBotMove } from '@/game-logic/bot';
 
 export interface GameBoardProps {
   gameState: any;
@@ -22,7 +25,7 @@ export interface GameBoardProps {
 
 export interface ClientGameEntry {
   Board: ComponentType<GameBoardProps>;
-  createInitialState(players: Player[]): any;
+  createInitialState(players: Player[], gameConfig?: any): any;
   validateAndApplyMove(state: any, playerId: string, move: any): { valid: boolean; state: any; error?: string };
   pickBotMove(state: any, playerId: string): any;
   isGameOver(state: any): boolean;
@@ -49,5 +52,12 @@ export const clientGameRegistry: Record<GameType, ClientGameEntry> = {
     validateAndApplyMove: bbApplyMove,
     pickBotMove: pickBurkutBoriBotMove,
     isGameOver: (state) => state.winner != null,
+  },
+  memory: {
+    Board: MemoryBoard as ComponentType<GameBoardProps>,
+    createInitialState: createMemoryState,
+    validateAndApplyMove: memoryApplyMove,
+    pickBotMove: pickMemoryBotMove,
+    isGameOver: (state) => state.gameOver,
   },
 };

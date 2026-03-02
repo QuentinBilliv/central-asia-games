@@ -102,7 +102,9 @@ export function isGameOver(playerBoards: AzulPlayerBoard[]): boolean {
 
 /**
  * Find the column where a color goes on a specific row of the wall.
+ * Returns -1 if the color is not found (should never happen with valid data).
  */
 export function getWallColumn(row: number, color: string): number {
+  if (row < 0 || row >= WALL_PATTERN.length) return -1;
   return WALL_PATTERN[row].indexOf(color as any);
 }

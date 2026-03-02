@@ -38,6 +38,11 @@
       "title": "Aigles & Loups",
       "description": "Les aigles dorés vous élèvent, les loups gris vous font descendre sur 100 cases",
       "players": "2-4 joueurs"
+    },
+    "memory": {
+      "title": "Memory",
+      "description": "Trouvez les paires de symboles d'Asie centrale cachés sur le plateau",
+      "players": "2-4 joueurs"
     }
   },
   "lobby": {
@@ -109,6 +114,23 @@
     "finish": "Arrivée",
     "offBoard": "Hors plateau",
     "cell": "Case {n}"
+  },
+  "memory": {
+    "yourTurn": "C'est votre tour",
+    "opponentTurn": "Tour de {name}",
+    "flipFirst": "Retournez une carte",
+    "flipSecond": "Retournez la 2e carte",
+    "match": "Paire trouvée !",
+    "noMatch": "Pas de paire",
+    "winner": "{name} a gagné !",
+    "tie": "Égalité !",
+    "pairs": "paires",
+    "pairsFound": "Paires trouvées",
+    "totalCards": "Cartes",
+    "totalPairs": "Paires",
+    "rows": "Lignes",
+    "columns": "Colonnes",
+    "gridSize": "Taille de la grille"
   },
   "local": {
     "title": "Partie locale",
