@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useMemo } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { GameType } from '@/game-logic/types';
@@ -61,6 +61,20 @@ export default function LocalGamePage() {
     }
   }, [localPlayers, startGame]);
 
+  // Determine which player is "viewing" the screen.
+  // In human-vs-bot: always the human. In hot-seat: the active player.
+  const viewingPlayerId = useMemo(() => {
+    if (!localPlayers || !activePlayerId) return activePlayerId;
+    const activeLp = localPlayers.find((p) => p.id === activePlayerId);
+    if (!activeLp?.isBot) return activePlayerId;
+    // Bot is active — find the human viewer
+    if (previousPlayerId) {
+      const prevLp = localPlayers.find((p) => p.id === previousPlayerId);
+      if (prevLp && !prevLp.isBot) return previousPlayerId;
+    }
+    return localPlayers.find((p) => !p.isBot)?.id ?? activePlayerId;
+  }, [localPlayers, activePlayerId, previousPlayerId]);
+
   // Handle turn transition screen for hot-seat
   useEffect(() => {
     if (!gameState || !activePlayerId || !localPlayers) return;
@@ -120,7 +134,7 @@ export default function LocalGamePage() {
       <div className="flex items-center justify-center min-h-[calc(100vh-16px)] sm:min-h-[calc(100vh-32px)]">
         <Board
           gameState={gameState}
-          playerId={activePlayerId!}
+          playerId={viewingPlayerId!}
           players={players}
           onMove={sendMove}
           onRestart={restartGame}
