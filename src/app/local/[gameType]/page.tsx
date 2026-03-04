@@ -8,6 +8,7 @@ import { useLocalGame, LocalPlayer } from '@/hooks/useLocalGame';
 import { clientGameRegistry } from '@/client/gameRegistry';
 import TurnTransitionScreen from '@/components/local/TurnTransitionScreen';
 import Button from '@/components/ui/Button';
+import RulesModal from '@/components/rules/RulesModal';
 
 export default function LocalGamePage() {
   const params = useParams();
@@ -19,6 +20,7 @@ export default function LocalGamePage() {
   const [localPlayers, setLocalPlayers] = useState<LocalPlayer[] | null>(null);
   const [gameConfig, setGameConfig] = useState<any>(undefined);
   const [showTransition, setShowTransition] = useState(false);
+  const [showRules, setShowRules] = useState(false);
   const hasStarted = useRef(false);
 
   // Read players and config from sessionStorage
@@ -119,6 +121,21 @@ export default function LocalGamePage() {
           &larr; {t('backToSetup')}
         </Button>
       </div>
+
+      {/* Rules button */}
+      <div className="absolute top-4 right-4 sm:top-3 sm:right-3 z-20">
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => setShowRules(true)}
+          className="text-white/70 hover:text-white"
+        >
+          ?
+        </Button>
+      </div>
+
+      {/* Rules modal */}
+      <RulesModal gameType={gameType} open={showRules} onClose={() => setShowRules(false)} />
 
       {/* Turn transition overlay */}
       {showTransition && (

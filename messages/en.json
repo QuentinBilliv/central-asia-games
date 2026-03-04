@@ -43,6 +43,11 @@
       "title": "Memory",
       "description": "Find matching pairs of Central Asian symbols hidden on the board",
       "players": "2-4 players"
+    },
+    "toguzKorgool": {
+      "title": "Toguz Korgool",
+      "description": "Ancient mancala game from the Kazakh and Kyrgyz steppes",
+      "players": "2 players"
     }
   },
   "lobby": {
@@ -132,6 +137,16 @@
     "columns": "Columns",
     "gridSize": "Grid size"
   },
+  "toguzKorgool": {
+    "yourTurn": "Your turn",
+    "opponentTurn": "{name}'s turn",
+    "winner": "{name} wins!",
+    "draw": "It's a draw!",
+    "stones": "stones",
+    "tuz": "Tuz",
+    "kazan": "Kazan",
+    "selectPit": "Select a pit to sow"
+  },
   "local": {
     "title": "Local Game",
     "subtitle": "Play on the same device",
@@ -146,6 +161,71 @@
     "backToSetup": "Back to setup",
     "namePlaceholder": "Your name...",
     "selectGame": "Choose a game"
+  },
+  "rules": {
+    "azul": {
+      "title": "Azul - Rules",
+      "objectiveTitle": "Objective",
+      "objective": "Score the most points by placing tiles on your palace wall. Create rows, columns, and color sets to earn bonus points.",
+      "setupTitle": "Setup",
+      "setup": "Each round, tiles are randomly drawn and placed on factory displays. The center of the table starts empty.",
+      "turnTitle": "Your turn",
+      "turn": "Pick all tiles of one color from a factory or the center. Place them on one of your 5 pattern lines (rows 1-5). Excess tiles go to your floor line (penalties). If you take from a factory, remaining tiles go to the center.",
+      "scoringTitle": "Scoring",
+      "scoring": "When a pattern line is full, one tile moves to the matching wall spot. Score 1 point per tile, plus bonuses for adjacent tiles in the same row/column. Floor line tiles subtract points.",
+      "endGameTitle": "End of game",
+      "endGame": "The game ends when a player completes a horizontal row on their wall. Bonus points: +2 per complete row, +7 per complete column, +10 for all 5 tiles of one color."
+    },
+    "petitsChevaux": {
+      "title": "Horse Race - Rules",
+      "objectiveTitle": "Objective",
+      "objective": "Be the first to move all 4 of your horses from the stable to the finish area.",
+      "setupTitle": "Setup",
+      "setup": "Each player has 4 horses in their stable. Roll a 6 to release a horse onto the board.",
+      "turnTitle": "Your turn",
+      "turn": "Roll the dice and move one of your horses forward by the number shown. Rolling a 6 gives you an extra turn and lets you release a horse from the stable.",
+      "captureTitle": "Capture",
+      "capture": "If your horse lands on a space occupied by an opponent's horse, the opponent's horse is sent back to the stable.",
+      "endGameTitle": "End of game",
+      "endGame": "Move your horses around the board and into your finish area. The first player to get all 4 horses home wins!"
+    },
+    "burkutBori": {
+      "title": "Eagles & Wolves - Rules",
+      "objectiveTitle": "Objective",
+      "objective": "Be the first player to reach cell 100 on the board.",
+      "turnTitle": "Your turn",
+      "turn": "Roll the dice and advance your piece by the number shown. Players start off the board and enter on their first roll.",
+      "eaglesTitle": "Eagles",
+      "eagles": "Land on a cell with a golden eagle and soar ahead! Eagles carry you to a higher cell on the board.",
+      "wolvesTitle": "Wolves",
+      "wolves": "Land on a cell with a grey wolf and slide back. Wolves drag you down to a lower cell.",
+      "endGameTitle": "End of game",
+      "endGame": "The first player to reach exactly cell 100 wins. If your roll would take you past 100, you don't move."
+    },
+    "memory": {
+      "title": "Memory - Rules",
+      "objectiveTitle": "Objective",
+      "objective": "Find the most matching pairs of cards. Each pair features a Central Asian symbol.",
+      "setupTitle": "Setup",
+      "setup": "Cards are shuffled and placed face down on the board. The grid size can be customized by the host.",
+      "turnTitle": "Your turn",
+      "turn": "Flip two cards. If they match, you keep the pair and play again. If they don't match, both cards are flipped back and it's the next player's turn.",
+      "endGameTitle": "End of game",
+      "endGame": "The game ends when all pairs are found. The player with the most pairs wins!"
+    },
+    "toguzKorgool": {
+      "title": "Toguz Korgool - Rules",
+      "objectiveTitle": "Objective",
+      "objective": "Capture more than 81 stones (out of 162 total). Each player starts with 9 pits containing 9 stones each.",
+      "setupTitle": "Setup",
+      "setup": "The board has two rows of 9 pits. Each pit starts with 9 stones. Each player also has a kazan (scoring pit) that starts empty.",
+      "turnTitle": "Your turn",
+      "turn": "Pick up all stones from one of your pits and sow them one by one counter-clockwise. If the last stone lands in an opponent's pit making it even, capture all stones from that pit into your kazan.",
+      "tuzTitle": "Tuz (special rule)",
+      "tuz": "If the last stone lands in an opponent's pit making it exactly 3, you may claim that pit as your tuz. All stones landing in a tuz go directly to your kazan. Each player can have at most one tuz, and the 9th pit cannot be a tuz.",
+      "endGameTitle": "End of game",
+      "endGame": "The game ends when a player captures more than 81 stones, or when a player cannot move. If both players have exactly 81 stones, it's a draw."
+    }
   },
   "language": {
     "fr": "Français",

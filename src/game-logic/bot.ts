@@ -8,6 +8,8 @@ import {
   BurkutBoriMove,
   MemoryGameState,
   MemoryMove,
+  ToguzKorgoolGameState,
+  ToguzKorgoolMove,
 } from './types';
 import { getWallColumn } from './azul/scoring';
 import { getValidMoves } from './petitsChevaux/moves';
@@ -132,4 +134,27 @@ export function pickMemoryBotMove(
 
   const card = available[secureRandomInt(available.length)];
   return { type: 'flip', cardIndex: card.index };
+}
+
+/**
+ * Pick a move for a Toguz Korgool bot.
+ * Prefers pits with more stones for bigger captures.
+ */
+export function pickToguzKorgoolBotMove(
+  state: ToguzKorgoolGameState,
+  _playerId: string
+): ToguzKorgoolMove | null {
+  const playerIdx = state.currentPlayerIndex;
+  const pits = state.players[playerIdx].pits;
+
+  // Get non-empty pits
+  const validPits: number[] = [];
+  for (let i = 0; i < pits.length; i++) {
+    if (pits[i] > 0) validPits.push(i);
+  }
+  if (validPits.length === 0) return null;
+
+  // Pick randomly among valid pits
+  const pitIndex = validPits[secureRandomInt(validPits.length)];
+  return { type: 'sow', pitIndex };
 }

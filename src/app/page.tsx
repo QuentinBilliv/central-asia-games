@@ -10,11 +10,13 @@ import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
 import { GameType } from '@/game-logic/types';
+import RulesModal from '@/components/rules/RulesModal';
 
 export default function HomePage() {
   const t = useTranslations();
   const router = useRouter();
   const [selectedGame, setSelectedGame] = useState<GameType | null>(null);
+  const [rulesGame, setRulesGame] = useState<GameType | null>(null);
 
   const createGame = async (gameType: GameType) => {
     try {
@@ -50,11 +52,17 @@ export default function HomePage() {
         </div>
 
         {/* Game Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-6xl w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6 max-w-7xl w-full">
           {/* Azul Card */}
           <Card variant="game" className="group" onClick={() => setSelectedGame('azul')}>
             <div className="relative h-36 sm:h-48 bg-gradient-to-br from-lapis to-turquoise overflow-hidden">
               <CentralAsianPattern variant="geometric" className="opacity-20" />
+              <button
+                onClick={(e) => { e.stopPropagation(); setRulesGame('azul'); }}
+                className="absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-sm flex items-center justify-center text-white text-sm font-bold transition-colors"
+              >
+                ?
+              </button>
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
                   {['bg-lapis', 'bg-gold', 'bg-terracotta', 'bg-turquoise', 'bg-night-400', 'bg-lapis', 'bg-gold', 'bg-terracotta', 'bg-turquoise'].map(
@@ -91,6 +99,12 @@ export default function HomePage() {
           <Card variant="game" className="group" onClick={() => setSelectedGame('petitsChevaux')}>
             <div className="relative h-36 sm:h-48 bg-gradient-to-br from-gold to-terracotta overflow-hidden">
               <CentralAsianPattern variant="ikat" className="opacity-20" />
+              <button
+                onClick={(e) => { e.stopPropagation(); setRulesGame('petitsChevaux'); }}
+                className="absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-sm flex items-center justify-center text-white text-sm font-bold transition-colors"
+              >
+                ?
+              </button>
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="relative">
                   <div className="w-20 h-20 sm:w-24 sm:h-24 border-2 border-white/40 rounded-lg rotate-45 relative">
@@ -127,6 +141,12 @@ export default function HomePage() {
           <Card variant="game" className="group" onClick={() => setSelectedGame('burkutBori')}>
             <div className="relative h-36 sm:h-48 bg-gradient-to-br from-[#1a1a2e] to-[#2d1b69] overflow-hidden">
               <CentralAsianPattern variant="geometric" className="opacity-10" />
+              <button
+                onClick={(e) => { e.stopPropagation(); setRulesGame('burkutBori'); }}
+                className="absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-sm flex items-center justify-center text-white text-sm font-bold transition-colors"
+              >
+                ?
+              </button>
               <div className="absolute inset-0 flex items-center justify-center gap-3 sm:gap-4">
                 {/* Eagle */}
                 <svg className="w-14 h-14 sm:w-16 sm:h-16 transform -translate-y-2 group-hover:scale-110 transition-transform duration-300" viewBox="0 0 24 24" fill="none">
@@ -170,6 +190,12 @@ export default function HomePage() {
           <Card variant="game" className="group" onClick={() => setSelectedGame('memory')}>
             <div className="relative h-36 sm:h-48 bg-gradient-to-br from-turquoise to-gold overflow-hidden">
               <CentralAsianPattern variant="ikat" className="opacity-15" />
+              <button
+                onClick={(e) => { e.stopPropagation(); setRulesGame('memory'); }}
+                className="absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-sm flex items-center justify-center text-white text-sm font-bold transition-colors"
+              >
+                ?
+              </button>
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
                   {['🏔️', '🐎', '?', '🦅', '?', '🐫', '🐎', '?', '🏔️', '?', '🐫', '🦅', '?', '?', '?', '?'].map(
@@ -206,6 +232,64 @@ export default function HomePage() {
                   {t('home.memory.players')}
                 </span>
                 <span className="text-sm font-medium text-turquoise">
+                  {t('home.play')}
+                </span>
+              </div>
+            </div>
+          </Card>
+          {/* Toguz Korgool Card */}
+          <Card variant="game" className="group" onClick={() => setSelectedGame('toguzKorgool')}>
+            <div className="relative h-36 sm:h-48 bg-gradient-to-br from-[#78350f] to-[#d4a017] overflow-hidden">
+              <CentralAsianPattern variant="geometric" className="opacity-15" />
+              <button
+                onClick={(e) => { e.stopPropagation(); setRulesGame('toguzKorgool'); }}
+                className="absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-sm flex items-center justify-center text-white text-sm font-bold transition-colors"
+              >
+                ?
+              </button>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="flex flex-col items-center gap-2">
+                  {/* Top row (opponent) */}
+                  <div className="flex gap-1">
+                    {[9, 7, 5, 8, 6, 4, 9, 3, 7].map((n, i) => (
+                      <div
+                        key={`t-${i}`}
+                        className="w-5 h-6 sm:w-6 sm:h-7 bg-white/10 rounded border border-white/20 flex items-center justify-center transform transition-transform group-hover:scale-110 duration-300"
+                        style={{ transitionDelay: `${i * 30}ms` }}
+                      >
+                        <span className="text-[9px] sm:text-[10px] font-bold text-white/70">{n}</span>
+                      </div>
+                    ))}
+                  </div>
+                  {/* Separator */}
+                  <div className="w-16 h-px bg-white/30" />
+                  {/* Bottom row (player) */}
+                  <div className="flex gap-1">
+                    {[9, 9, 9, 9, 9, 9, 9, 9, 9].map((n, i) => (
+                      <div
+                        key={`b-${i}`}
+                        className="w-5 h-6 sm:w-6 sm:h-7 bg-white/20 rounded border border-white/30 flex items-center justify-center transform transition-transform group-hover:scale-110 duration-300"
+                        style={{ transitionDelay: `${(i + 9) * 30}ms` }}
+                      >
+                        <span className="text-[9px] sm:text-[10px] font-bold text-white/90">{n}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="p-4 sm:p-5">
+              <h2 className="font-serif text-lg sm:text-xl font-bold text-night mb-1.5 sm:mb-2">
+                {t('home.toguzKorgool.title')}
+              </h2>
+              <p className="text-xs sm:text-sm text-night-400 mb-2 sm:mb-3">
+                {t('home.toguzKorgool.description')}
+              </p>
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-[#78350f] font-medium bg-amber-50 px-2 py-1 rounded">
+                  {t('home.toguzKorgool.players')}
+                </span>
+                <span className="text-sm font-medium text-[#78350f]">
                   {t('home.play')}
                 </span>
               </div>
@@ -255,6 +339,15 @@ export default function HomePage() {
             </Button>
           </div>
         </Modal>
+
+        {/* Rules modal */}
+        {rulesGame && (
+          <RulesModal
+            gameType={rulesGame}
+            open={true}
+            onClose={() => setRulesGame(null)}
+          />
+        )}
       </main>
 
       <Footer />

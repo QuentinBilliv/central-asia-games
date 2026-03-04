@@ -2,6 +2,7 @@ import { azulHandler } from './azul';
 import { petitsChevauxHandler } from './petitsChevaux';
 import { burkutBoriHandler } from './burkutBori';
 import { memoryHandler } from './memory';
+import { toguzKorgoolHandler } from './toguzKorgool';
 import { GameHandlerRegistry } from './types';
 
 export const gameHandlers: GameHandlerRegistry = {
@@ -9,4 +10,5 @@ export const gameHandlers: GameHandlerRegistry = {
   petitsChevaux: petitsChevauxHandler,
   burkutBori: burkutBoriHandler,
   memory: memoryHandler,
+  toguzKorgool: toguzKorgoolHandler,
 };

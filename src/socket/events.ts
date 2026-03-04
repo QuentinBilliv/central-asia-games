@@ -25,6 +25,11 @@ export const MemoryMoveSchema = z.object({
   cardIndex: z.number().int().min(0).max(63), // max grid 8x8 = 64 cards
 });
 
+export const ToguzKorgoolMoveSchema = z.object({
+  type: z.literal('sow'),
+  pitIndex: z.number().int().min(0).max(8),
+});
+
 export const MemoryGameConfigSchema = z.object({
   rows: z.number().int().min(4).max(8),
   cols: z.number().int().min(4).max(8),

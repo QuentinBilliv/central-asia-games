@@ -43,6 +43,11 @@
       "title": "Memory",
       "description": "Trouvez les paires de symboles d'Asie centrale cachés sur le plateau",
       "players": "2-4 joueurs"
+    },
+    "toguzKorgool": {
+      "title": "Toguz Korgool",
+      "description": "Ancien jeu de mancala des steppes kazakhes et kirghizes",
+      "players": "2 joueurs"
     }
   },
   "lobby": {
@@ -132,6 +137,16 @@
     "columns": "Colonnes",
     "gridSize": "Taille de la grille"
   },
+  "toguzKorgool": {
+    "yourTurn": "C'est votre tour",
+    "opponentTurn": "Tour de {name}",
+    "winner": "{name} a gagné !",
+    "draw": "Égalité !",
+    "stones": "pierres",
+    "tuz": "Tuz",
+    "kazan": "Kazan",
+    "selectPit": "Choisissez un puits à semer"
+  },
   "local": {
     "title": "Partie locale",
     "subtitle": "Jouez sur le même appareil",
@@ -146,6 +161,71 @@
     "backToSetup": "Retour à la configuration",
     "namePlaceholder": "Votre pseudo...",
     "selectGame": "Choisissez un jeu"
+  },
+  "rules": {
+    "azul": {
+      "title": "Azul - Règles",
+      "objectiveTitle": "Objectif",
+      "objective": "Marquez le plus de points en plaçant des carreaux sur votre mur de palais. Créez des lignes, colonnes et ensembles de couleurs pour des points bonus.",
+      "setupTitle": "Mise en place",
+      "setup": "Chaque manche, des carreaux sont tirés au sort et placés sur les fabriques. Le centre de la table commence vide.",
+      "turnTitle": "Votre tour",
+      "turn": "Prenez tous les carreaux d'une couleur d'une fabrique ou du centre. Placez-les sur une de vos 5 lignes de motif (rangées 1-5). Les carreaux en excès vont sur votre ligne de pénalité. Si vous prenez d'une fabrique, les carreaux restants vont au centre.",
+      "scoringTitle": "Scoring",
+      "scoring": "Quand une ligne de motif est pleine, un carreau se déplace sur le mur. Marquez 1 point par carreau, plus des bonus pour les carreaux adjacents dans la même ligne/colonne. Les carreaux de pénalité retirent des points.",
+      "endGameTitle": "Fin de partie",
+      "endGame": "La partie se termine quand un joueur complète une ligne horizontale sur son mur. Bonus : +2 par ligne complète, +7 par colonne complète, +10 pour les 5 carreaux d'une même couleur."
+    },
+    "petitsChevaux": {
+      "title": "Petits Chevaux - Règles",
+      "objectiveTitle": "Objectif",
+      "objective": "Soyez le premier à amener vos 4 chevaux de l'écurie à l'arrivée.",
+      "setupTitle": "Mise en place",
+      "setup": "Chaque joueur a 4 chevaux dans son écurie. Faites un 6 pour sortir un cheval sur le plateau.",
+      "turnTitle": "Votre tour",
+      "turn": "Lancez le dé et avancez un de vos chevaux du nombre indiqué. Un 6 vous donne un tour supplémentaire et permet de sortir un cheval de l'écurie.",
+      "captureTitle": "Capture",
+      "capture": "Si votre cheval atterrit sur une case occupée par un cheval adverse, celui-ci retourne à l'écurie.",
+      "endGameTitle": "Fin de partie",
+      "endGame": "Faites le tour du plateau et entrez dans votre zone d'arrivée. Le premier joueur à ramener ses 4 chevaux gagne !"
+    },
+    "burkutBori": {
+      "title": "Aigles & Loups - Règles",
+      "objectiveTitle": "Objectif",
+      "objective": "Soyez le premier joueur à atteindre la case 100 sur le plateau.",
+      "turnTitle": "Votre tour",
+      "turn": "Lancez le dé et avancez votre pion du nombre indiqué. Les joueurs commencent hors du plateau et entrent à leur premier lancer.",
+      "eaglesTitle": "Aigles",
+      "eagles": "Atterrissez sur une case avec un aigle doré et envolez-vous ! Les aigles vous transportent vers une case plus élevée.",
+      "wolvesTitle": "Loups",
+      "wolves": "Atterrissez sur une case avec un loup gris et redescendez. Les loups vous entraînent vers une case plus basse.",
+      "endGameTitle": "Fin de partie",
+      "endGame": "Le premier joueur à atteindre exactement la case 100 gagne. Si votre lancer vous amène au-delà de 100, vous ne bougez pas."
+    },
+    "memory": {
+      "title": "Memory - Règles",
+      "objectiveTitle": "Objectif",
+      "objective": "Trouvez le plus de paires de cartes correspondantes. Chaque paire représente un symbole d'Asie centrale.",
+      "setupTitle": "Mise en place",
+      "setup": "Les cartes sont mélangées et placées face cachée. La taille de la grille peut être personnalisée par l'hôte.",
+      "turnTitle": "Votre tour",
+      "turn": "Retournez deux cartes. Si elles correspondent, vous gardez la paire et rejouez. Sinon, les cartes sont retournées et c'est au joueur suivant.",
+      "endGameTitle": "Fin de partie",
+      "endGame": "La partie se termine quand toutes les paires sont trouvées. Le joueur avec le plus de paires gagne !"
+    },
+    "toguzKorgool": {
+      "title": "Toguz Korgool - Règles",
+      "objectiveTitle": "Objectif",
+      "objective": "Capturez plus de 81 pierres (sur 162 au total). Chaque joueur commence avec 9 puits contenant 9 pierres chacun.",
+      "setupTitle": "Mise en place",
+      "setup": "Le plateau a deux rangées de 9 puits. Chaque puits commence avec 9 pierres. Chaque joueur a aussi un kazan (puits de score) qui commence vide.",
+      "turnTitle": "Votre tour",
+      "turn": "Prenez toutes les pierres d'un de vos puits et semez-les une par une dans le sens inverse des aiguilles d'une montre. Si la dernière pierre tombe dans un puits adverse et le rend pair, capturez toutes les pierres de ce puits dans votre kazan.",
+      "tuzTitle": "Tuz (règle spéciale)",
+      "tuz": "Si la dernière pierre tombe dans un puits adverse et le porte à exactement 3, vous pouvez le déclarer comme votre tuz. Toutes les pierres tombant dans un tuz vont directement dans votre kazan. Chaque joueur ne peut avoir qu'un seul tuz, et le 9e puits ne peut pas être un tuz.",
+      "endGameTitle": "Fin de partie",
+      "endGame": "La partie se termine quand un joueur capture plus de 81 pierres, ou quand un joueur ne peut plus jouer. Si les deux joueurs ont exactement 81 pierres, c'est un match nul."
+    }
   },
   "language": {
     "fr": "Français",

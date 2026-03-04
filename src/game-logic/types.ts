@@ -1,6 +1,6 @@
 // Shared types for all games
 
-export const GAME_TYPES = ['azul', 'petitsChevaux', 'burkutBori', 'memory'] as const;
+export const GAME_TYPES = ['azul', 'petitsChevaux', 'burkutBori', 'memory', 'toguzKorgool'] as const;
 export type GameType = (typeof GAME_TYPES)[number];
 export type GameStatus = 'waiting' | 'playing' | 'finished';
 
@@ -17,7 +17,7 @@ export interface Room {
   players: Player[];
   hostId: string;
   status: GameStatus;
-  gameState: AzulGameState | PetitsChevauxGameState | BurkutBoriGameState | MemoryGameState | null;
+  gameState: AzulGameState | PetitsChevauxGameState | BurkutBoriGameState | MemoryGameState | ToguzKorgoolGameState | null;
   gameConfig?: MemoryGameConfig;
   createdAt: number;
   lastActivity: number;
@@ -180,4 +180,29 @@ export interface MemoryGameState {
 export interface MemoryMove {
   type: 'flip';
   cardIndex: number;
+}
+
+// ===== Toguz Korgool Types =====
+
+export interface ToguzKorgoolPlayerState {
+  playerId: string;
+  playerIndex: number; // 0 or 1
+  pits: number[]; // 9 pits, each with stone count
+  kazan: number; // captured stones (scoring pit)
+  tpieces: number; // alias — same as kazan, kept for clarity
+  tuz: number | null; // index (0-8) of opponent's pit claimed as tuz, or null
+}
+
+export interface ToguzKorgoolGameState {
+  type: 'toguzKorgool';
+  players: ToguzKorgoolPlayerState[];
+  currentPlayerIndex: number;
+  turnOrder: string[]; // exactly 2 player IDs
+  winner: string | null;
+  isDraw: boolean;
+}
+
+export interface ToguzKorgoolMove {
+  type: 'sow';
+  pitIndex: number; // 0-8, which pit to pick up and sow from
 }

@@ -15,7 +15,7 @@ export class RoomManager {
       gameState: null,
       createdAt: Date.now(),
       lastActivity: Date.now(),
-      maxPlayers: 4,
+      maxPlayers: gameType === 'toguzKorgool' ? 2 : 4,
     };
     this.rooms.set(roomId, room);
     return room;

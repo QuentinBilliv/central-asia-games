@@ -18,6 +18,7 @@ import { getSocket } from '@/socket/client';
 import { GameType, MemoryGameConfig } from '@/game-logic/types';
 import { DEFAULT_ROWS, DEFAULT_COLS } from '@/game-logic/memory/constants';
 import { clientGameRegistry } from '@/client/gameRegistry';
+import RulesModal from '@/components/rules/RulesModal';
 
 export default function RoomPage() {
   const params = useParams();
@@ -32,6 +33,7 @@ export default function RoomPage() {
   const { players, hostId, status, gameType, joined, error } = useLobbyStore();
   const [gameState, setGameState] = useState<any>(null);
   const [memoryConfig, setMemoryConfig] = useState<MemoryGameConfig>({ rows: DEFAULT_ROWS, cols: DEFAULT_COLS });
+  const [showRules, setShowRules] = useState(false);
 
   // Effective game type: from lobby state or URL
   const effectiveGameType = gameType || gameTypeFromUrl;
@@ -80,6 +82,16 @@ export default function RoomPage() {
       <div className="min-h-screen flex flex-col bg-night">
         <Header />
         <main className="flex-1 relative">
+          {/* Rules button */}
+          <div className="absolute top-4 right-4 z-20">
+            <button
+              onClick={() => setShowRules(true)}
+              className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white text-sm font-bold transition-colors"
+            >
+              ?
+            </button>
+          </div>
+          <RulesModal gameType={effectiveGameType} open={showRules} onClose={() => setShowRules(false)} />
           {gameState && (
             <Board
               gameState={gameState}

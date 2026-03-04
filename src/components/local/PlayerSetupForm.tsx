@@ -15,9 +15,10 @@ export interface PlayerConfig {
 
 interface Props {
   onStart: (players: PlayerConfig[]) => void;
+  maxPlayers?: number;
 }
 
-export default function PlayerSetupForm({ onStart }: Props) {
+export default function PlayerSetupForm({ onStart, maxPlayers = 4 }: Props) {
   const t = useTranslations('local');
 
   const [players, setPlayers] = useState<PlayerConfig[]>([
@@ -25,7 +26,7 @@ export default function PlayerSetupForm({ onStart }: Props) {
     { nickname: BOT_NAMES[0], isBot: true },
   ]);
 
-  const canAdd = players.length < 4;
+  const canAdd = players.length < maxPlayers;
   const canRemove = players.length > 2;
 
   const humanCount = players.filter((p) => !p.isBot).length;
