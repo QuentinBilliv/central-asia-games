@@ -10,9 +10,12 @@ import {
   MemoryMove,
   ToguzKorgoolGameState,
   ToguzKorgoolMove,
+  BackgammonGameState,
+  BackgammonMove,
 } from './types';
 import { getWallColumn } from './azul/scoring';
 import { getValidMoves } from './petitsChevaux/moves';
+import { getValidMovesForDie } from './backgammon/moves';
 import { secureRandomInt } from './random';
 
 /**
@@ -157,4 +160,42 @@ export function pickToguzKorgoolBotMove(
   // Pick randomly among valid pits
   const pitIndex = validPits[secureRandomInt(validPits.length)];
   return { type: 'sow', pitIndex };
+}
+
+/**
+ * Pick a move for a Backgammon bot.
+ * Rolls if must roll, otherwise picks a random valid checker move.
+ */
+export function pickBackgammonBotMove(
+  state: BackgammonGameState,
+  _playerId: string
+): BackgammonMove | null {
+  if (state.mustRoll) {
+    return { type: 'roll' };
+  }
+
+  const playerIndex = state.currentPlayerIndex;
+
+  // Try each remaining die and collect all valid moves
+  const allMoves: { from: number; to: number; die: number }[] = [];
+  for (const die of state.remainingMoves) {
+    const moves = getValidMovesForDie(state, playerIndex, die);
+    for (const m of moves) {
+      allMoves.push({ ...m, die });
+    }
+  }
+
+  if (allMoves.length === 0) {
+    return { type: 'endTurn' };
+  }
+
+  // Prefer bearing off, then hitting, then random
+  const bearOff = allMoves.filter((m) => m.to === 25);
+  if (bearOff.length > 0) {
+    const pick = bearOff[secureRandomInt(bearOff.length)];
+    return { type: 'move', from: pick.from, to: pick.to };
+  }
+
+  const pick = allMoves[secureRandomInt(allMoves.length)];
+  return { type: 'move', from: pick.from, to: pick.to };
 }

@@ -72,6 +72,10 @@ export function useLocalGame(gameType: GameType, localPlayers: LocalPlayer[], ga
         delay += 1000;
       }
     }
+    // Backgammon: longer delay for dice roll, shorter for subsequent moves
+    if (gameState.type === 'backgammon') {
+      delay = gameState.mustRoll ? 1200 : 800;
+    }
 
     botTimeoutRef.current = setTimeout(() => {
       const move = handler.pickBotMove(gameState, currentId);

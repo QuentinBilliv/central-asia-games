@@ -52,7 +52,7 @@ export default function HomePage() {
         </div>
 
         {/* Game Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6 max-w-7xl w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 sm:gap-6 max-w-7xl w-full">
           {/* Azul Card */}
           <Card variant="game" className="group" onClick={() => setSelectedGame('azul')}>
             <div className="relative h-36 sm:h-48 bg-gradient-to-br from-lapis to-turquoise overflow-hidden">
@@ -290,6 +290,77 @@ export default function HomePage() {
                   {t('home.toguzKorgool.players')}
                 </span>
                 <span className="text-sm font-medium text-[#78350f]">
+                  {t('home.play')}
+                </span>
+              </div>
+            </div>
+          </Card>
+          {/* Backgammon Card */}
+          <Card variant="game" className="group" onClick={() => setSelectedGame('backgammon')}>
+            <div className="relative h-36 sm:h-48 bg-gradient-to-br from-[#2a1810] to-[#5c3a1e] overflow-hidden">
+              <CentralAsianPattern variant="geometric" className="opacity-10" />
+              <button
+                onClick={(e) => { e.stopPropagation(); setRulesGame('backgammon'); }}
+                className="absolute top-2 right-2 z-10 w-7 h-7 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-sm flex items-center justify-center text-white text-sm font-bold transition-colors"
+              >
+                ?
+              </button>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="flex flex-col items-center gap-2">
+                  {/* Triangles */}
+                  <div className="flex gap-0.5">
+                    {[0, 1, 2, 3, 4, 5].map((i) => (
+                      <div
+                        key={`t-${i}`}
+                        className={`w-4 h-10 sm:w-5 sm:h-12 ${i % 2 === 0 ? 'bg-terracotta/70' : 'bg-turquoise/70'} transform transition-transform group-hover:scale-110 duration-300`}
+                        style={{
+                          clipPath: 'polygon(50% 100%, 0% 0%, 100% 0%)',
+                          transitionDelay: `${i * 40}ms`,
+                        }}
+                      />
+                    ))}
+                  </div>
+                  {/* Checkers */}
+                  <div className="flex gap-2">
+                    <div className="flex gap-0.5">
+                      {[0, 1, 2].map((i) => (
+                        <div key={`g-${i}`} className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gold border-2 border-white/30 shadow-md transform transition-transform group-hover:scale-110 duration-300" style={{ transitionDelay: `${(i + 6) * 40}ms` }} />
+                      ))}
+                    </div>
+                    <div className="flex gap-0.5">
+                      {[0, 1, 2].map((i) => (
+                        <div key={`l-${i}`} className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-lapis border-2 border-white/30 shadow-md transform transition-transform group-hover:scale-110 duration-300" style={{ transitionDelay: `${(i + 9) * 40}ms` }} />
+                      ))}
+                    </div>
+                  </div>
+                  {/* Bottom triangles */}
+                  <div className="flex gap-0.5">
+                    {[0, 1, 2, 3, 4, 5].map((i) => (
+                      <div
+                        key={`b-${i}`}
+                        className={`w-4 h-10 sm:w-5 sm:h-12 ${i % 2 === 0 ? 'bg-turquoise/70' : 'bg-terracotta/70'} transform transition-transform group-hover:scale-110 duration-300`}
+                        style={{
+                          clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)',
+                          transitionDelay: `${(i + 12) * 40}ms`,
+                        }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="p-4 sm:p-5">
+              <h2 className="font-serif text-lg sm:text-xl font-bold text-night mb-1.5 sm:mb-2">
+                {t('home.backgammon.title')}
+              </h2>
+              <p className="text-xs sm:text-sm text-night-400 mb-2 sm:mb-3">
+                {t('home.backgammon.description')}
+              </p>
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-[#5c3a1e] font-medium bg-amber-50 px-2 py-1 rounded">
+                  {t('home.backgammon.players')}
+                </span>
+                <span className="text-sm font-medium text-[#5c3a1e]">
                   {t('home.play')}
                 </span>
               </div>

@@ -9,6 +9,7 @@ import PetitsChevauxRules from './PetitsChevauxRules';
 import BurkutBoriRules from './BurkutBoriRules';
 import MemoryRules from './MemoryRules';
 import ToguzKorgoolRules from './ToguzKorgoolRules';
+import BackgammonRules from './BackgammonRules';
 
 const rulesComponents: Record<GameType, ComponentType> = {
   azul: AzulRules,
@@ -16,6 +17,7 @@ const rulesComponents: Record<GameType, ComponentType> = {
   burkutBori: BurkutBoriRules,
   memory: MemoryRules,
   toguzKorgool: ToguzKorgoolRules,
+  backgammon: BackgammonRules,
 };
 
 interface RulesModalProps {

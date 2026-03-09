@@ -3,6 +3,7 @@ import { petitsChevauxHandler } from './petitsChevaux';
 import { burkutBoriHandler } from './burkutBori';
 import { memoryHandler } from './memory';
 import { toguzKorgoolHandler } from './toguzKorgool';
+import { backgammonHandler } from './backgammon';
 import { GameHandlerRegistry } from './types';
 
 export const gameHandlers: GameHandlerRegistry = {
@@ -11,4 +12,5 @@ export const gameHandlers: GameHandlerRegistry = {
   burkutBori: burkutBoriHandler,
   memory: memoryHandler,
   toguzKorgool: toguzKorgoolHandler,
+  backgammon: backgammonHandler,
 };

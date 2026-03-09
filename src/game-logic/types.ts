@@ -1,6 +1,6 @@
 // Shared types for all games
 
-export const GAME_TYPES = ['azul', 'petitsChevaux', 'burkutBori', 'memory', 'toguzKorgool'] as const;
+export const GAME_TYPES = ['azul', 'petitsChevaux', 'burkutBori', 'memory', 'toguzKorgool', 'backgammon'] as const;
 export type GameType = (typeof GAME_TYPES)[number];
 export type GameStatus = 'waiting' | 'playing' | 'finished';
 
@@ -17,7 +17,7 @@ export interface Room {
   players: Player[];
   hostId: string;
   status: GameStatus;
-  gameState: AzulGameState | PetitsChevauxGameState | BurkutBoriGameState | MemoryGameState | ToguzKorgoolGameState | null;
+  gameState: AzulGameState | PetitsChevauxGameState | BurkutBoriGameState | MemoryGameState | ToguzKorgoolGameState | BackgammonGameState | null;
   gameConfig?: MemoryGameConfig;
   createdAt: number;
   lastActivity: number;
@@ -205,4 +205,30 @@ export interface ToguzKorgoolGameState {
 export interface ToguzKorgoolMove {
   type: 'sow';
   pitIndex: number; // 0-8, which pit to pick up and sow from
+}
+
+// ===== Backgammon (Nard) Types =====
+
+// Each point holds checkers: positive count = player 0, negative = player 1
+// points[0] = point 1, points[23] = point 24
+// Player 0 moves from high to low (home = points 0-5)
+// Player 1 moves from low to high (home = points 18-23)
+export interface BackgammonGameState {
+  type: 'backgammon';
+  points: number[]; // 24 points, signed integers
+  bar: [number, number]; // checkers on bar for [player0, player1]
+  borneOff: [number, number]; // checkers borne off for [player0, player1]
+  dice: [number, number] | null; // current dice roll
+  remainingMoves: number[]; // dice values still to be used
+  mustRoll: boolean; // true if current player needs to roll
+  currentPlayerIndex: number;
+  turnOrder: string[];
+  winner: string | null;
+  doublingCube: number; // not used in this implementation but part of state
+}
+
+export interface BackgammonMove {
+  type: 'roll' | 'move' | 'endTurn';
+  from?: number; // 0-23 for board points, 24 for bar
+  to?: number; // 0-23 for board points, 25 for bearing off
 }

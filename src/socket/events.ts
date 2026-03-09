@@ -30,6 +30,16 @@ export const ToguzKorgoolMoveSchema = z.object({
   pitIndex: z.number().int().min(0).max(8),
 });
 
+export const BackgammonMoveSchema = z.discriminatedUnion('type', [
+  z.object({ type: z.literal('roll') }),
+  z.object({
+    type: z.literal('move'),
+    from: z.number().int().min(0).max(24), // 0-23 board, 24 bar
+    to: z.number().int().min(0).max(25),   // 0-23 board, 25 bear off
+  }),
+  z.object({ type: z.literal('endTurn') }),
+]);
+
 export const MemoryGameConfigSchema = z.object({
   rows: z.number().int().min(4).max(8),
   cols: z.number().int().min(4).max(8),

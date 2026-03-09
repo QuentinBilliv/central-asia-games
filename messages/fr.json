@@ -48,6 +48,11 @@
       "title": "Toguz Korgool",
       "description": "Ancien jeu de mancala des steppes kazakhes et kirghizes",
       "players": "2 joueurs"
+    },
+    "backgammon": {
+      "title": "Backgammon",
+      "description": "Le jeu ancestral de stratégie et de dés, adoré le long de la Route de la Soie",
+      "players": "2 joueurs"
     }
   },
   "lobby": {
@@ -147,6 +152,18 @@
     "kazan": "Kazan",
     "selectPit": "Choisissez un puits à semer"
   },
+  "backgammon": {
+    "yourTurn": "C'est votre tour",
+    "opponentTurn": "Tour de {name}",
+    "winner": "{name} a gagné !",
+    "rollDice": "Lancer les dés",
+    "bearOff": "Sortir",
+    "borneOff": "sortis",
+    "movesLeft": "Coups restants",
+    "playAgain": "Rejouer",
+    "bar": "Barre",
+    "home": "Maison"
+  },
   "local": {
     "title": "Partie locale",
     "subtitle": "Jouez sur le même appareil",
@@ -212,6 +229,21 @@
       "turn": "Retournez deux cartes. Si elles correspondent, vous gardez la paire et rejouez. Sinon, les cartes sont retournées et c'est au joueur suivant.",
       "endGameTitle": "Fin de partie",
       "endGame": "La partie se termine quand toutes les paires sont trouvées. Le joueur avec le plus de paires gagne !"
+    },
+    "backgammon": {
+      "title": "Backgammon - Règles",
+      "objectiveTitle": "Objectif",
+      "objective": "Soyez le premier à sortir vos 15 pions du plateau.",
+      "setupTitle": "Mise en place",
+      "setup": "Chaque joueur commence avec 15 pions placés sur des points spécifiques. L'Or se déplace du point 24 vers le point 1, le Lapis du point 1 vers le point 24.",
+      "turnTitle": "Votre tour",
+      "turn": "Lancez deux dés et déplacez vos pions du nombre indiqué. Vous pouvez répartir les dés entre deux pions ou les utiliser sur un seul. Les doubles donnent quatre mouvements au lieu de deux.",
+      "hittingTitle": "Frappe",
+      "hitting": "Si vous atterrissez sur un point avec un seul pion adverse (un blot), il est envoyé à la barre. Ce joueur doit le réintroduire avant tout autre mouvement.",
+      "bearingOffTitle": "Sortie des pions",
+      "bearingOff": "Une fois tous vos pions dans votre jan intérieur (6 derniers points), vous pouvez commencer à les sortir. Lancez un nombre correspondant à un point avec votre pion pour le retirer.",
+      "endGameTitle": "Fin de partie",
+      "endGame": "Le premier joueur à sortir ses 15 pions remporte la partie."
     },
     "toguzKorgool": {
       "title": "Toguz Korgool - Règles",

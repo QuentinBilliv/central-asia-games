@@ -21,6 +21,7 @@ const gameGradients: Record<GameType, string> = {
   burkutBori: 'from-[#1a1a2e] to-[#2d1b69]',
   memory: 'from-turquoise to-gold',
   toguzKorgool: 'from-[#78350f] to-[#d4a017]',
+  backgammon: 'from-[#2a1810] to-[#5c3a1e]',
 };
 
 function GameIcon({ game }: { game: GameType }) {
@@ -90,6 +91,18 @@ function GameIcon({ game }: { game: GameType }) {
               </div>
             ))}
           </div>
+        </div>
+      );
+    case 'backgammon':
+      return (
+        <div className="flex items-center gap-1">
+          {[0, 1, 2].map((i) => (
+            <div key={`g-${i}`} className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-gold border border-white/30" />
+          ))}
+          <div className="w-1" />
+          {[0, 1, 2].map((i) => (
+            <div key={`l-${i}`} className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-lapis border border-white/30" />
+          ))}
         </div>
       );
   }
@@ -181,7 +194,7 @@ export default function LocalSetupPage() {
         )}
 
         {/* Player setup */}
-        <PlayerSetupForm onStart={handleStart} maxPlayers={selectedGame === 'toguzKorgool' ? 2 : 4} />
+        <PlayerSetupForm onStart={handleStart} maxPlayers={(selectedGame === 'toguzKorgool' || selectedGame === 'backgammon') ? 2 : 4} />
 
         {/* Rules modal */}
         <RulesModal gameType={selectedGame} open={showRules} onClose={() => setShowRules(false)} />

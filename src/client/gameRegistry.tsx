@@ -5,6 +5,7 @@ import PetitsChevauxBoard from '@/components/petitsChevaux/PetitsChevauxBoard';
 import BurkutBoriBoard from '@/components/burkutBori/BurkutBoriBoard';
 import MemoryBoard from '@/components/memory/MemoryBoard';
 import ToguzKorgoolBoard from '@/components/toguzKorgool/ToguzKorgoolBoard';
+import BackgammonBoard from '@/components/backgammon/BackgammonBoard';
 import { createInitialState as createAzulState } from '@/game-logic/azul/state';
 import { validateAndApplyMove as azulApplyMove } from '@/game-logic/azul/moves';
 import { createInitialState as createPCState } from '@/game-logic/petitsChevaux/state';
@@ -15,7 +16,9 @@ import { createInitialState as createMemoryState } from '@/game-logic/memory/sta
 import { validateAndApplyMove as memoryApplyMove } from '@/game-logic/memory/moves';
 import { createInitialState as createTKState } from '@/game-logic/toguzKorgool/state';
 import { validateAndApplyMove as tkApplyMove } from '@/game-logic/toguzKorgool/moves';
-import { pickAzulBotMove, pickPetitsChevauxBotMove, pickBurkutBoriBotMove, pickMemoryBotMove, pickToguzKorgoolBotMove } from '@/game-logic/bot';
+import { createInitialState as createBGState } from '@/game-logic/backgammon/state';
+import { validateAndApplyMove as bgApplyMove } from '@/game-logic/backgammon/moves';
+import { pickAzulBotMove, pickPetitsChevauxBotMove, pickBurkutBoriBotMove, pickMemoryBotMove, pickToguzKorgoolBotMove, pickBackgammonBotMove } from '@/game-logic/bot';
 
 export interface GameBoardProps {
   gameState: any;
@@ -69,5 +72,12 @@ export const clientGameRegistry: Record<GameType, ClientGameEntry> = {
     validateAndApplyMove: tkApplyMove,
     pickBotMove: pickToguzKorgoolBotMove,
     isGameOver: (state) => state.winner != null || state.isDraw,
+  },
+  backgammon: {
+    Board: BackgammonBoard as ComponentType<GameBoardProps>,
+    createInitialState: createBGState,
+    validateAndApplyMove: bgApplyMove,
+    pickBotMove: pickBackgammonBotMove,
+    isGameOver: (state) => state.winner != null,
   },
 };

@@ -48,6 +48,11 @@
       "title": "Toguz Korgool",
       "description": "Ancient mancala game from the Kazakh and Kyrgyz steppes",
       "players": "2 players"
+    },
+    "backgammon": {
+      "title": "Backgammon",
+      "description": "The ancient game of strategy and dice, beloved across the Silk Road",
+      "players": "2 players"
     }
   },
   "lobby": {
@@ -147,6 +152,18 @@
     "kazan": "Kazan",
     "selectPit": "Select a pit to sow"
   },
+  "backgammon": {
+    "yourTurn": "Your turn",
+    "opponentTurn": "{name}'s turn",
+    "winner": "{name} wins!",
+    "rollDice": "Roll dice",
+    "bearOff": "Bear off",
+    "borneOff": "borne off",
+    "movesLeft": "Moves left",
+    "playAgain": "Play again",
+    "bar": "Bar",
+    "home": "Home"
+  },
   "local": {
     "title": "Local Game",
     "subtitle": "Play on the same device",
@@ -212,6 +229,21 @@
       "turn": "Flip two cards. If they match, you keep the pair and play again. If they don't match, both cards are flipped back and it's the next player's turn.",
       "endGameTitle": "End of game",
       "endGame": "The game ends when all pairs are found. The player with the most pairs wins!"
+    },
+    "backgammon": {
+      "title": "Backgammon - Rules",
+      "objectiveTitle": "Objective",
+      "objective": "Be the first to bear off all 15 of your checkers from the board.",
+      "setupTitle": "Setup",
+      "setup": "Each player starts with 15 checkers placed on specific points. Gold moves from point 24 toward point 1, Lapis moves from point 1 toward point 24.",
+      "turnTitle": "Your turn",
+      "turn": "Roll two dice and move your checkers forward by the values shown. You may split the dice between two checkers or use both on one. Doubles give you four moves instead of two.",
+      "hittingTitle": "Hitting",
+      "hitting": "If you land on a point with exactly one opponent checker (a blot), it is sent to the bar. That player must re-enter from the bar before making other moves.",
+      "bearingOffTitle": "Bearing off",
+      "bearingOff": "Once all your checkers are in your home board (last 6 points), you can start bearing them off. Roll a number matching a point with your checker to remove it.",
+      "endGameTitle": "End of game",
+      "endGame": "The first player to bear off all 15 checkers wins the game."
     },
     "toguzKorgool": {
       "title": "Toguz Korgool - Rules",
